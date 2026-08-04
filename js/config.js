@@ -1,61 +1,49 @@
 /* ==========================================================================
    RE HOUSE — Site Configuration
    --------------------------------------------------------------------------
-   THIS IS THE ONLY FILE YOU NEED TO EDIT TO CONNECT THE CONTACT FORM.
-   Everything else works out of the box.
+   THIS IS THE ONLY FILE YOU NEED TO EDIT TO GET THE SITE FULLY WORKING.
+   Three values. Fill them in and everything else takes care of itself.
    ========================================================================== */
 
 const RE_HOUSE_CONFIG = {
 
   /* ------------------------------------------------------------------
-     1. TALLY FORM  (recommended — you already use Tally)
+     1. TALLY FORM ID
      ------------------------------------------------------------------
-     How to fill this in:
+     How to get it:
        1. Build the enquiry form at tally.so
-       2. Hit "Share" → copy the link, e.g.  https://tally.so/r/wAbC12
-       3. The bit after /r/ is your form ID — paste it below.
+       2. Hit "Share" and copy the link, e.g.  https://tally.so/r/mZ1a4B
+       3. The bit after /r/ is the ID — paste it below.
 
-     Once tallyFormId has a value, the styled placeholder form on the
-     homepage is automatically swapped for your live Tally form.
-     Leave it as an empty string ('') to keep the placeholder.
+     While this is empty, the contact panel shows the "Email Andrew"
+     button instead (pre-filled with the property questions), so the
+     page always has a working contact path.
      ------------------------------------------------------------------ */
   tallyFormId: '',
 
-  /* Height of the embedded Tally form in pixels. Bump it if the form
-     gets cut off at the bottom. */
-  tallyHeight: 560,
+  /* Starting height of the embedded form in pixels. It auto-resizes to
+     fit once Tally's script loads, so this is just the initial value. */
+  tallyHeight: 420,
 
 
   /* ------------------------------------------------------------------
-     2. FALLBACK ENDPOINT  (optional)
+     2. BOOKING LINK  (Calendly, Cal.com, whatever Andrew uses)
      ------------------------------------------------------------------
-     If you'd rather keep the custom-styled form and send submissions
-     somewhere else (Formspree, Make, Zapier, a webhook), paste the URL
-     here and leave tallyFormId empty. The form will POST JSON to it.
+     Example: 'https://calendly.com/andrew-rehouse/discovery-call'
 
-     Example (Formspree):  'https://formspree.io/f/xyzabcde'
+     While this is empty, the "Pick a time directly" line is hidden so
+     visitors never hit a dead link.
      ------------------------------------------------------------------ */
-  formEndpoint: '',
+  bookingUrl: '',
 
 
   /* ------------------------------------------------------------------
-     3. WHERE TO SEND PEOPLE AFTER A SUCCESSFUL SUBMIT
-     ------------------------------------------------------------------ */
-  successRedirect: 'thank-you.html',
-
-
-  /* ------------------------------------------------------------------
-     4. CONTACT DETAILS  (used in the footer and mailto fallback)
-     ------------------------------------------------------------------ */
-  email: 'hello@rehouse.ca',
-  instagram: 'https://instagram.com/rehouse.toronto',
-
-
-  /* ------------------------------------------------------------------
-     5. BOOKING LINK  (Calendly / Cal.com — optional)
+     3. CONTACT DETAILS
      ------------------------------------------------------------------
-     If set, the "Book a consult" nav button opens this link in a new
-     tab instead of scrolling to the contact form.
+     Used for the email fallback button. If any of these change, update
+     them here AND in the footer of index.html.
      ------------------------------------------------------------------ */
-  bookingUrl: ''
+  email: 'andrew@rehouseto.ca',
+  mobile: '647-309-4770',
+  office: '416-535-8859'
 };

@@ -4,6 +4,8 @@ Marketing site for **Re House**, a Toronto pre-sale design and renovation studio
 Plain HTML, CSS and JavaScript — no build step, no framework, no dependencies.
 Edit a file, push it, and it's live in about 30 seconds.
 
+Built from the `ReHouse_Homepage_V1_3` mockup.
+
 ---
 
 ## Folder structure
@@ -11,7 +13,6 @@ Edit a file, push it, and it's live in about 30 seconds.
 ```
 rehouse-website/
 ├── index.html          ← the homepage (all the words live here)
-├── thank-you.html      ← shown after someone submits the form
 ├── privacy.html        ← privacy policy
 ├── 404.html            ← shown when a page doesn't exist
 │
@@ -20,16 +21,15 @@ rehouse-website/
 │   └── responsive.css  ← everything that changes on tablet & phone
 │
 ├── js/
-│   ├── config.js       ← ⚙️ SETTINGS — the only file you need to edit to
-│   │                      connect the contact form
-│   └── main.js         ← menu, animations, form handling
+│   ├── config.js       ← ⚙️ SETTINGS — the only file you need to edit
+│   └── main.js         ← Tally embed, booking link, scroll animations
 │
 ├── assets/
 │   ├── images/         ← photos and the logo
 │   ├── icons/          ← favicon
 │   └── fonts/          ← self-hosted fonts (currently loaded from Google)
 │
-├── CNAME               ← the custom domain (rehouse.ca)
+├── CNAME               ← the custom domain (rehouseto.ca)
 ├── robots.txt          ← tells search engines they may index the site
 ├── sitemap.xml         ← lists the pages for Google
 ├── .nojekyll           ← tells GitHub Pages to serve files as-is
@@ -38,51 +38,50 @@ rehouse-website/
 
 ---
 
-## Where to change things
+## Two things to fill in
 
-| I want to change…              | Open this file                              |
-| ------------------------------ | ------------------------------------------- |
-| Any words on the homepage      | `index.html`                                |
-| Brand colours                  | `css/style.css` — section 01, at the top     |
-| Spacing, fonts, layout         | `css/style.css`                             |
-| How it looks on a phone        | `css/responsive.css`                        |
-| Where the contact form goes    | `js/config.js`                              |
-| Service tiers and pricing      | `index.html` — search for `SERVICES`         |
-| The scrolling results bar      | `index.html` — search for `RESULTS TICKER`   |
-| Project case studies           | `index.html` — search for `PROJECTS`         |
+Open **`js/config.js`**. There are only three settings and two of them are blank:
 
-Every section in the HTML and CSS has a big comment header, so use
-`Ctrl+F` / `Cmd+F` and search for the section name in capitals.
+**1. The Tally form**
+
+```js
+tallyFormId: 'mZ1a4B',
+```
+
+Build the enquiry form at [tally.so](https://tally.so), hit **Share**, copy the link
+(e.g. `https://tally.so/r/mZ1a4B`) — the bit after `/r/` is the ID.
+
+Until this is set, the contact panel shows an **Email Andrew** button instead,
+pre-filled with the property questions. Nothing is broken in the meantime.
+
+**2. The booking link**
+
+```js
+bookingUrl: 'https://calendly.com/andrew-rehouse/discovery-call',
+```
+
+Until this is set, the "Pick a time directly" line is hidden, so nobody clicks
+through to a dead link.
+
+That's it. No other file needs touching to make the site functional.
 
 ---
 
-## Connecting the contact form
+## Where to change things
 
-Open `js/config.js` and fill in **one** of these:
+| I want to change…              | Open this file                            |
+| ------------------------------ | ----------------------------------------- |
+| Any words on the homepage      | `index.html`                              |
+| Brand colours                  | `css/style.css` — section 01, at the top   |
+| Spacing, fonts, layout         | `css/style.css`                           |
+| How it looks on a phone        | `css/responsive.css`                      |
+| Tally form / booking link      | `js/config.js`                            |
+| Service tiers and pricing      | `index.html` — search for `SERVICES`       |
+| The 5-step process             | `index.html` — search for `PROCESS`        |
+| Phone numbers and email        | `index.html` footer **and** `js/config.js` |
 
-**Option A — Tally (recommended)**
-
-1. Build the enquiry form at [tally.so](https://tally.so)
-2. Click **Share** and copy the link, e.g. `https://tally.so/r/wAbC12`
-3. The bit after `/r/` is the form ID. Paste it:
-
-```js
-tallyFormId: 'wAbC12',
-```
-
-The styled placeholder form on the homepage is swapped for the live
-Tally form automatically. Done.
-
-**Option B — any other endpoint** (Formspree, Make, Zapier, a webhook)
-
-```js
-formEndpoint: 'https://formspree.io/f/xyzabcde',
-```
-
-The custom-styled form stays and POSTs JSON to that URL.
-
-**Until either is set**, the form opens the visitor's email app pre-filled
-with their details — so nothing is lost while it's being wired up.
+Every section in the HTML and CSS has a big comment header, so use
+`Ctrl+F` and search for the section name in capitals.
 
 ---
 
@@ -116,9 +115,6 @@ python3 -m http.server 8000
 # then open http://localhost:8000
 ```
 
-(Opening `index.html` by double-clicking works too, but the local server
-is closer to how the live site behaves.)
-
 ---
 
 ## Hosting
@@ -126,9 +122,9 @@ is closer to how the live site behaves.)
 Hosted free on **GitHub Pages**, deploying from the `main` branch.
 
 - Live at: `https://YOUR-USERNAME.github.io/rehouse-website/`
-- Custom domain: `rehouse.ca` (set in the `CNAME` file)
+- Custom domain: `rehouseto.ca` (set in the `CNAME` file)
 
-### Pointing rehouse.ca at the site
+### Pointing rehouseto.ca at the site
 
 At your domain registrar, add these DNS records:
 
@@ -140,29 +136,29 @@ At your domain registrar, add these DNS records:
 | A     | `@`   | `185.199.111.153`         |
 | CNAME | `www` | `YOUR-USERNAME.github.io` |
 
-Then in the repo: **Settings → Pages → Custom domain**, enter `rehouse.ca`,
-save, and tick **Enforce HTTPS** once the certificate is issued (can take
-up to an hour).
+Then in the repo: **Settings → Pages → Custom domain**, enter `rehouseto.ca`,
+save, and tick **Enforce HTTPS** once the certificate is issued (can take up
+to an hour).
 
-**Not using the custom domain yet?** Delete the `CNAME` file — the site
-will just run on the `github.io` address.
+**Not using the custom domain yet?** Delete the `CNAME` file — the site will
+just run on the `github.io` address.
 
 ---
 
 ## Still to do
 
-- [ ] Connect the contact form (`js/config.js`)
-- [ ] Swap the placeholder before/after gradients for real project photos
-- [ ] Replace the sample ROI figures with Re House's actual numbers
-- [ ] Add a real client testimonial with permission to use it
-- [ ] Point the `rehouse.ca` DNS records at GitHub Pages
-- [ ] Confirm the disclaimer needs on ROI claims (marketing copy vs. real results)
+- [ ] Paste the Tally form ID into `js/config.js`
+- [ ] Paste Andrew's booking link into `js/config.js`
+- [ ] Point the `rehouseto.ca` DNS records at GitHub Pages
+- [ ] Add real project photography (there is no gallery section yet — worth
+      adding once there are before/after shots worth showing)
+- [ ] Confirm the brokerage's required disclosure wording for the footer
 
 ---
 
-## A note on the numbers
+## Note on the footer
 
-The ROI figures, sale prices and days-on-market in the ticker, stats block
-and project cards are **placeholders from the design mockup**. Swap them for
-Re House's real results before the site goes public — advertised performance
-claims need to be substantiable.
+The footer carries `Andrew Long, Realtor®.` and `Powered by Origin Collective
+Realty`. Brokerages usually have specific rules about how an agent's name and
+the brokerage name must appear on marketing material — worth a quick check with
+Origin Collective before the site is promoted publicly.
