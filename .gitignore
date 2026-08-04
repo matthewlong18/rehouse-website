@@ -1,0 +1,18 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Logs & dependencies (not used yet, here for later)
+node_modules/
+npm-debug.log*
+*.log
+
+# Local environment / secrets — never commit these
+.env
+.env.local

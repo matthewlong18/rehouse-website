@@ -1,0 +1,188 @@
+/* ==========================================================================
+   RE HOUSE — Responsive Stylesheet
+   --------------------------------------------------------------------------
+   All screen-size rules live here so the main stylesheet stays readable.
+   Breakpoints:
+     1200px  — large laptop
+     1024px  — small laptop / landscape tablet
+      768px  — tablet / large phone
+      480px  — phone
+   ========================================================================== */
+
+
+/* ==========================================================================
+   LARGE LAPTOP — up to 1200px
+   ========================================================================== */
+@media (max-width: 1200px) {
+  :root {
+    --section-y: 5.5rem;
+    --section-x: 2.5rem;
+  }
+
+  .nav { padding: 0 2.5rem; }
+
+  .hero__right { padding: 4rem 3rem; }
+
+  .intro,
+  .preview { gap: 3rem; }
+
+  .footer { padding: 3.5rem 2.5rem; }
+}
+
+
+/* ==========================================================================
+   SMALL LAPTOP / LANDSCAPE TABLET — up to 1024px
+   ========================================================================== */
+@media (max-width: 1024px) {
+  /* Hero stacks: dark panel on top, content below */
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .hero__left {
+    padding: 3rem 2.5rem 0;
+  }
+  .hero__left-foot {
+    margin: 2.5rem -2.5rem 0;
+    padding: 1rem 2.5rem;
+  }
+  .hero__right {
+    padding: 4rem 2.5rem;
+  }
+
+  /* Process steps go 3-across, then wrap */
+  .steps { grid-template-columns: repeat(3, 1fr); row-gap: 3rem; }
+  .steps__spine { display: none; }
+
+  /* Tiers stack to a single column so pricing stays readable */
+  .tiers { grid-template-columns: 1fr; }
+
+  .projects__grid { grid-template-columns: repeat(2, 1fr); }
+
+  .preview { grid-template-columns: 1fr; gap: 3.5rem; }
+
+  .contact { grid-template-columns: 1fr; gap: 3rem; }
+
+  .footer { grid-template-columns: 1fr 1fr; }
+}
+
+
+/* ==========================================================================
+   TABLET / LARGE PHONE — up to 768px
+   ========================================================================== */
+@media (max-width: 768px) {
+  :root {
+    --section-y: 4rem;
+    --section-x: 1.5rem;
+  }
+
+  /* --- Mobile navigation --- */
+  .nav {
+    padding: 0 1.5rem;
+  }
+  .nav__toggle {
+    display: flex;
+  }
+  .nav__links {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--bone);
+    border-bottom: 0.5px solid var(--border);
+    padding: 1rem 1.5rem 1.75rem;
+    transform: translateY(-120%);
+    transition: transform 0.3s ease;
+    box-shadow: 0 12px 24px rgba(42, 36, 32, 0.06);
+  }
+  .nav__links.is-open {
+    transform: translateY(0);
+  }
+  .nav__link {
+    font-size: 12px;
+    padding: 0.9rem 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav__cta {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 11px;
+    padding: 14px 22px;
+  }
+
+  /* --- Hero --- */
+  .hero__left { padding: 2.5rem 1.5rem 0; }
+  .hero__left-foot {
+    margin: 2rem -1.5rem 0;
+    padding: 0.9rem 1.5rem;
+  }
+  .hero__right { padding: 3rem 1.5rem; }
+  .hero__watermark { font-size: 140px; }
+  .hero__sub { margin-bottom: 2rem; }
+  .hero__buttons { gap: 1rem; }
+
+  /* --- Sections --- */
+  .intro { grid-template-columns: 1fr; gap: 2.5rem; }
+
+  .steps { grid-template-columns: repeat(2, 1fr); row-gap: 2.5rem; }
+
+  .projects__grid { grid-template-columns: 1fr; }
+
+  .preview__cards { gap: 0.75rem; }
+  .preview__result { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .preview__result-figure { margin-left: 0; text-align: left; }
+
+  .form { padding: 2rem 1.5rem; }
+
+  .footer {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+    padding: 3rem 1.5rem;
+  }
+  .footer__bottom { flex-direction: column; gap: 0.5rem; }
+
+  .page { padding: calc(var(--nav-height) + 4rem) 1.5rem 4rem; }
+}
+
+
+/* ==========================================================================
+   PHONE — up to 480px
+   ========================================================================== */
+@media (max-width: 480px) {
+  .hero__title { font-size: 34px; }
+  .hero__buttons { flex-direction: column; align-items: flex-start; }
+  .btn-primary { width: 100%; text-align: center; }
+
+  .stats { grid-template-columns: 1fr; }
+  .stat  { padding: 1.75rem 1.25rem; }
+  .stat__number { font-size: 36px; }
+
+  .steps { grid-template-columns: 1fr; row-gap: 2rem; }
+  .step  { align-items: flex-start; text-align: left; }
+
+  .project__stats { gap: 1rem; flex-wrap: wrap; }
+
+  .preview__cards { grid-template-columns: 1fr; }
+
+  .quote__mark { font-size: 56px; }
+
+  .tier { padding: 2rem 1.5rem; }
+}
+
+
+/* ==========================================================================
+   PRINT
+   ========================================================================== */
+@media print {
+  .nav,
+  .ticker,
+  .form,
+  .nav__toggle { display: none !important; }
+
+  body { background: #fff; color: #000; }
+  .section { padding: 1rem 0; }
+  .reveal { opacity: 1; transform: none; }
+}

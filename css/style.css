@@ -1,0 +1,1256 @@
+/* ==========================================================================
+   RE HOUSE — Main Stylesheet
+   --------------------------------------------------------------------------
+   TABLE OF CONTENTS
+   01. Design tokens (colours, type, spacing)
+   02. Reset & base
+   03. Reusable utilities
+   04. Navigation
+   05. Hero
+   06. Ticker
+   07. Intro / philosophy
+   08. Process
+   09. Services
+   10. Projects
+   11. Re Preview (AI)
+   12. Quote
+   13. Contact / CTA
+   14. Footer
+   15. Animations
+   16. Legal pages
+   --------------------------------------------------------------------------
+   Responsive rules live in css/responsive.css
+   ========================================================================== */
+
+
+/* ==========================================================================
+   01. DESIGN TOKENS
+   Change a colour here and it updates everywhere on the site.
+   ========================================================================== */
+:root {
+  /* Brand colours */
+  --bone:         #F8F5F0;
+  --pebble:       #E8E0D4;
+  --tan:          #C4A882;
+  --tan-light:    #D4BCA0;
+  --charcoal:     #5A5048;
+  --charcoal-dk:  #3E3830;
+  --black:        #2A2420;
+  --mid:          #8A8078;
+  --light-mid:    #B0A89C;
+
+  /* Lines & borders */
+  --border:       rgba(42, 36, 32, 0.12);
+  --border-solid: #D0C8BC;
+
+  /* Typography */
+  --font-body:    'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+
+  /* Layout */
+  --nav-height:   64px;
+  --section-y:    7rem;   /* vertical padding on sections */
+  --section-x:    4rem;   /* horizontal padding on sections */
+}
+
+
+/* ==========================================================================
+   02. RESET & BASE
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bone);
+  color: var(--black);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+/* Visible focus outline for keyboard users (accessibility) */
+:focus-visible {
+  outline: 2px solid var(--tan);
+  outline-offset: 3px;
+}
+
+/* Skip link — hidden until focused via keyboard */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  background: var(--black);
+  color: var(--bone);
+  padding: 12px 20px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+
+/* ==========================================================================
+   03. REUSABLE UTILITIES
+   ========================================================================== */
+.section {
+  padding: var(--section-y) var(--section-x);
+}
+
+.accent-bar {
+  height: 3px;
+  background: var(--tan);
+}
+
+.eyebrow {
+  font-size: 9px;
+  font-weight: 200;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--tan);
+  margin-bottom: 1.5rem;
+}
+
+.h2 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.2vw, 44px);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--black);
+}
+
+.h2--gap        { margin-bottom: 1.75rem; }
+.h2--gap-sm     { margin-bottom: 1.25rem; }
+.h2--gap-md     { margin-bottom: 1.5rem; }
+.h2--gap-lg     { margin-bottom: 3rem; }
+.h2--gap-xl     { margin-bottom: 4.5rem; }
+
+/* Buttons */
+.btn-primary {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--tan);
+  color: var(--bone);
+  padding: 14px 28px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background: var(--charcoal);
+}
+
+.btn-ghost {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  text-decoration: none;
+  border-bottom: 0.5px solid rgba(90, 80, 72, 0.3);
+  padding-bottom: 2px;
+  transition: color 0.2s ease;
+}
+.btn-ghost:hover,
+.btn-ghost:focus {
+  color: var(--tan);
+}
+
+/* Wordmark — used in nav, hero and footer at different sizes */
+.wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.wordmark__re {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+.wordmark__divider {
+  width: 1px;
+  background: var(--border-solid);
+  flex-shrink: 0;
+}
+.wordmark__house {
+  font-family: var(--font-body);
+  font-weight: 200;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+}
+
+
+/* ==========================================================================
+   04. NAVIGATION
+   ========================================================================== */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3.5rem;
+  background: rgba(248, 245, 240, 0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 0.5px solid var(--border);
+}
+
+.nav__logo .wordmark__re    { font-size: 28px; color: var(--black); }
+.nav__logo .wordmark__divider { height: 18px; }
+.nav__logo .wordmark__house { font-size: 9px; color: var(--charcoal); }
+
+.nav__links {
+  display: flex;
+  gap: 2.25rem;
+  align-items: center;
+}
+
+.nav__link {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.nav__link:hover,
+.nav__link:focus,
+.nav__link.is-active {
+  color: var(--tan);
+}
+
+.nav__cta {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: var(--black);
+  color: var(--bone);
+  padding: 10px 22px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+.nav__cta:hover,
+.nav__cta:focus {
+  background: var(--charcoal);
+}
+
+/* Hamburger button — hidden on desktop, shown in responsive.css */
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.nav__toggle span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--black);
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+.nav__toggle.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav__toggle.is-open span:nth-child(2) { opacity: 0; }
+.nav__toggle.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+
+/* ==========================================================================
+   05. HERO
+   ========================================================================== */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 36% 64%;
+  padding-top: var(--nav-height);
+}
+
+.hero__left {
+  background: var(--black);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3.5rem 2.75rem 0;
+}
+
+/* The two offset squares that form the brand mark */
+.mark {
+  position: relative;
+  flex-shrink: 0;
+}
+.mark__sq {
+  position: absolute;
+}
+.mark__sq--front { top: 0; left: 0; border: 1.5px solid var(--tan); }
+.mark__sq--back  { border: 1px solid var(--charcoal); }
+
+.hero__mark        { width: 30px; height: 30px; }
+.hero__mark .mark__sq { width: 19px; height: 19px; }
+.hero__mark .mark__sq--back { top: 7px; left: 7px; }
+
+.hero__logo { margin-top: 2.5rem; }
+.hero__logo .wordmark          { margin-bottom: 10px; }
+.hero__logo .wordmark__re      { font-size: 38px; font-weight: 200; color: var(--bone); }
+.hero__logo .wordmark__divider { height: 24px; background: rgba(208, 200, 188, 0.4); }
+.hero__logo .wordmark__house   { font-size: 10px; color: var(--pebble); }
+
+.hero__rule {
+  width: 32px;
+  height: 1px;
+  background: var(--tan);
+  margin: 16px 0;
+}
+
+.hero__left-body {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: rgba(232, 224, 212, 0.58);
+  line-height: 1.7;
+}
+
+.hero__left-foot {
+  background: var(--tan);
+  margin: 3rem -2.75rem 0;
+  padding: 1rem 2.75rem;
+}
+.hero__left-foot-text {
+  font-size: 9px;
+  font-weight: 200;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bone);
+}
+
+.hero__right {
+  background: var(--bone);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5rem 4.5rem 5rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Oversized watermark letters behind the headline */
+.hero__watermark {
+  position: absolute;
+  bottom: -0.08em;
+  right: -0.04em;
+  font-family: var(--font-display);
+  font-size: clamp(160px, 20vw, 280px);
+  font-weight: 300;
+  color: rgba(42, 36, 32, 0.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero__eyebrow {
+  font-size: 9px;
+  font-weight: 200;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--tan);
+  margin-bottom: 1.75rem;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4.5vw, 62px);
+  font-weight: 300;
+  color: var(--black);
+  line-height: 1.08;
+  margin-bottom: 2rem;
+}
+.hero__title em {
+  font-style: italic;
+  color: var(--charcoal);
+}
+
+.hero__accent {
+  width: 36px;
+  height: 1.5px;
+  background: var(--tan);
+  margin-bottom: 1.75rem;
+}
+
+.hero__sub {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.85;
+  max-width: 400px;
+  margin-bottom: 2.75rem;
+}
+
+.hero__buttons {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+
+/* ==========================================================================
+   06. TICKER
+   ========================================================================== */
+.ticker {
+  background: var(--black);
+  height: 36px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.ticker__track {
+  display: flex;
+  animation: ticker-scroll 32s linear infinite;
+  white-space: nowrap;
+}
+
+.ticker__item {
+  font-size: 10px;
+  font-weight: 200;
+  letter-spacing: 0.18em;
+  color: var(--pebble);
+  padding: 0 2.5rem;
+  border-right: 0.5px solid rgba(232, 224, 212, 0.12);
+}
+.ticker__item span {
+  color: var(--tan);
+}
+
+
+/* ==========================================================================
+   07. INTRO / PHILOSOPHY
+   ========================================================================== */
+.intro {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.intro__body {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.9;
+  margin-bottom: 1.5rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border-solid);
+}
+
+.stat {
+  background: var(--bone);
+  padding: 2.25rem 1.75rem;
+}
+.stat__number {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 300;
+  color: var(--tan);
+  line-height: 1;
+}
+.stat__label {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--mid);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+
+/* ==========================================================================
+   08. PROCESS
+   ========================================================================== */
+.process {
+  background: var(--pebble);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  position: relative;
+}
+
+.steps__spine {
+  position: absolute;
+  top: 20px;
+  left: 5%;
+  right: 8%;
+  height: 0.5px;
+  background: var(--border-solid);
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 0.5rem;
+}
+.step__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--tan);
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+.step__number {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-style: italic;
+  color: var(--tan);
+  margin-bottom: 0.6rem;
+}
+.step__title {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--black);
+  margin-bottom: 0.4rem;
+}
+.step__meta {
+  font-size: 9px;
+  font-weight: 200;
+  letter-spacing: 0.15em;
+  color: var(--charcoal);
+  margin-bottom: 0.65rem;
+}
+.step__body {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.7;
+}
+
+
+/* ==========================================================================
+   09. SERVICES
+   ========================================================================== */
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border-solid);
+}
+
+.tier {
+  background: var(--bone);
+  padding: 2.5rem 2rem;
+  position: relative;
+}
+.tier--featured {
+  background: var(--black);
+}
+
+.tier__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--charcoal);
+}
+.tier--featured .tier__bar { background: var(--tan); }
+.tier--bespoke .tier__bar  { background: var(--tan); opacity: 0.5; }
+
+.tier__badge {
+  font-size: 8px;
+  font-weight: 200;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 1rem;
+}
+.tier--featured .tier__badge,
+.tier--bespoke .tier__badge { color: var(--tan); }
+
+.tier__name {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--black);
+  margin-bottom: 0.5rem;
+}
+.tier--featured .tier__name { color: var(--bone); }
+
+.tier__price {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--tan);
+  margin-bottom: 1.5rem;
+}
+
+.tier__rule {
+  width: 32px;
+  height: 0.5px;
+  background: var(--border-solid);
+  margin-bottom: 1.5rem;
+}
+.tier--featured .tier__rule { background: rgba(232, 224, 212, 0.18); }
+
+.tier__list {
+  list-style: none;
+  color: var(--mid);
+}
+.tier--featured .tier__list { color: var(--pebble); }
+
+.tier__list li {
+  font-size: 12px;
+  font-weight: 300;
+  padding: 5px 0 5px 1.2rem;
+  position: relative;
+  line-height: 1.5;
+}
+.tier__list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+}
+
+
+/* ==========================================================================
+   10. PROJECTS
+   ========================================================================== */
+.projects {
+  background: var(--pebble);
+}
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.project {
+  background: var(--bone);
+}
+
+/* Placeholder before/after panel.
+   To use real photos: replace .project__pane--before / --after
+   background with url('../assets/images/your-photo.jpg') center/cover; */
+.project__media {
+  height: 210px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.project__pane {
+  display: flex;
+  align-items: flex-end;
+  padding: 0.75rem;
+}
+.project__pane--before {
+  background: linear-gradient(160deg, var(--charcoal), var(--black));
+}
+.project__pane--after {
+  background: linear-gradient(160deg, var(--tan), var(--tan-light));
+  justify-content: flex-end;
+}
+
+.project__tag {
+  font-size: 8px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+}
+.project__tag--before {
+  background: rgba(248, 245, 240, 0.16);
+  color: rgba(248, 245, 240, 0.8);
+}
+.project__tag--after {
+  background: rgba(42, 36, 32, 0.18);
+  color: var(--black);
+}
+
+.project__info { padding: 1.25rem 1.5rem; }
+
+.project__hood {
+  font-size: 9px;
+  font-weight: 200;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--tan);
+  margin-bottom: 0.4rem;
+}
+.project__name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--black);
+  margin-bottom: 0.75rem;
+}
+.project__stats {
+  display: flex;
+  gap: 1.5rem;
+}
+.project__stat-value {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--tan);
+}
+.project__stat-label {
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--mid);
+}
+
+
+/* ==========================================================================
+   11. RE PREVIEW (AI)
+   ========================================================================== */
+.preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.preview__body {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.9;
+  margin-bottom: 2rem;
+}
+
+.preview__points {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.preview__point {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.preview__point-bar {
+  width: 3px;
+  min-height: 44px;
+  background: var(--tan);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.preview__point-title {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--black);
+  margin-bottom: 3px;
+}
+.preview__point-body {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.7;
+}
+
+.preview__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+.preview__card {
+  border: 0.5px solid var(--border-solid);
+  padding: 1.25rem;
+}
+.preview__card-label {
+  font-size: 9px;
+  font-weight: 200;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 0.75rem;
+}
+.preview__card--after .preview__card-label { color: var(--tan); }
+
+.preview__block {
+  height: 110px;
+  margin-bottom: 0.6rem;
+  background: linear-gradient(135deg, var(--charcoal), var(--black));
+}
+.preview__block--after {
+  background: linear-gradient(135deg, var(--tan), var(--tan-light));
+}
+
+.preview__caption {
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--mid);
+}
+
+.preview__result {
+  grid-column: 1 / -1;
+  border: 0.5px solid var(--border-solid);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.preview__result-label {
+  font-size: 9px;
+  font-weight: 200;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--tan);
+  margin-bottom: 0.3rem;
+}
+.preview__result-headline {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--black);
+}
+.preview__result-figure {
+  margin-left: auto;
+  text-align: right;
+}
+.preview__result-number {
+  font-family: var(--font-display);
+  font-size: 38px;
+  font-weight: 300;
+  color: var(--tan);
+}
+.preview__result-caption {
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--mid);
+}
+
+
+/* ==========================================================================
+   12. QUOTE
+   ========================================================================== */
+.quote {
+  background: var(--charcoal);
+  text-align: center;
+}
+
+.quote__mark {
+  font-family: var(--font-display);
+  font-size: 72px;
+  font-weight: 300;
+  color: var(--tan);
+  line-height: 0.6;
+  margin-bottom: 2rem;
+}
+.quote__text {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.4vw, 26px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--bone);
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  line-height: 1.55;
+}
+.quote__attr {
+  font-size: 11px;
+  font-weight: 200;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--tan);
+}
+
+
+/* ==========================================================================
+   13. CONTACT / CTA
+   ========================================================================== */
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contact__body {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.9;
+  margin-bottom: 2rem;
+}
+
+.contact__checks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+.contact__check {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+.contact__dash {
+  width: 16px;
+  height: 1.5px;
+  background: var(--tan);
+  margin-top: 9px;
+  flex-shrink: 0;
+}
+.contact__check-text {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.6;
+}
+
+/* Form */
+.form {
+  background: var(--black);
+  padding: 2.75rem;
+}
+
+.form__label {
+  display: block;
+  font-size: 9px;
+  font-weight: 200;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--tan);
+  margin-bottom: 0.5rem;
+}
+
+.form__input,
+.form__select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 0.5px solid rgba(196, 168, 130, 0.22);
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--bone);
+  outline: none;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.2s ease;
+  border-radius: 0;
+}
+.form__input:focus,
+.form__select:focus {
+  border-color: var(--tan);
+}
+.form__input::placeholder {
+  color: rgba(196, 168, 130, 0.28);
+}
+
+.form__select {
+  color: rgba(196, 168, 130, 0.55);
+  margin-bottom: 1.5rem;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--tan) 50%),
+                    linear-gradient(135deg, var(--tan) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 19px, calc(100% - 13px) 19px;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+.form__select option {
+  background: var(--black);
+  color: var(--bone);
+}
+
+/* Invalid field state — added by js/main.js on submit */
+.form__input.is-invalid,
+.form__select.is-invalid {
+  border-color: #C4726A;
+}
+
+.form__button {
+  width: 100%;
+  background: var(--tan);
+  border: none;
+  padding: 16px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--bone);
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+.form__button:hover:not(:disabled) {
+  background: var(--charcoal);
+}
+.form__button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.form__note {
+  font-size: 10px;
+  font-weight: 300;
+  color: rgba(196, 168, 130, 0.32);
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+/* Status message shown after submit */
+.form__status {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.6;
+  margin-top: 1rem;
+  text-align: center;
+  min-height: 1.2em;
+}
+.form__status--success { color: var(--tan); }
+.form__status--error   { color: #E0938A; }
+
+/* Honeypot — invisible field that only bots fill in */
+.form__honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+
+/* ==========================================================================
+   14. FOOTER
+   ========================================================================== */
+.footer {
+  background: var(--black);
+  border-top: 0.5px solid rgba(196, 168, 130, 0.1);
+  padding: 3.5rem var(--section-x);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 3rem;
+}
+
+.footer__logo { margin-bottom: 0.75rem; }
+.footer__logo .wordmark__re       { font-size: 26px; font-weight: 200; color: var(--bone); }
+.footer__logo .wordmark__divider  { height: 16px; background: rgba(208, 200, 188, 0.25); }
+.footer__logo .wordmark__house    { font-size: 8px; color: var(--pebble); }
+
+.footer__tagline {
+  font-size: 11px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(232, 224, 212, 0.35);
+  line-height: 1.5;
+}
+
+.footer__col-title {
+  font-size: 9px;
+  font-weight: 200;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--tan);
+  margin-bottom: 1rem;
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.footer__link {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(232, 224, 212, 0.48);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer__link:hover,
+.footer__link:focus {
+  color: var(--tan);
+}
+
+.footer__bottom {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 0.5px solid rgba(232, 224, 212, 0.07);
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.footer__copy {
+  font-size: 10px;
+  font-weight: 300;
+  color: rgba(232, 224, 212, 0.2);
+}
+.footer__copy a {
+  color: inherit;
+  text-decoration: none;
+}
+.footer__copy a:hover { color: var(--tan); }
+
+
+/* ==========================================================================
+   15. ANIMATIONS
+   ========================================================================== */
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero__right > *:not(.hero__watermark) {
+  animation: fade-up 0.75s ease forwards;
+  opacity: 0;
+}
+.hero__eyebrow { animation-delay: 0.20s; }
+.hero__title   { animation-delay: 0.35s; }
+.hero__accent  { animation-delay: 0.48s; }
+.hero__sub     { animation-delay: 0.58s; }
+.hero__buttons { animation-delay: 0.72s; }
+
+/* Scroll-triggered reveal — class toggled by js/main.js */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .hero__right > * { opacity: 1; }
+}
+
+
+/* ==========================================================================
+   16. LEGAL & UTILITY PAGES (privacy, thank-you)
+   ========================================================================== */
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: calc(var(--nav-height) + 6rem) 2rem 6rem;
+}
+
+.page__title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.page__meta {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 3rem;
+}
+
+.page h2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  margin: 2.5rem 0 0.75rem;
+}
+
+.page p,
+.page li {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--charcoal);
+  line-height: 1.9;
+}
+
+.page p  { margin-bottom: 1rem; }
+.page ul { margin: 0 0 1rem 1.25rem; }
+.page a  { color: var(--tan); }
+
+/* Thank-you page */
+.thanks {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+.thanks__mark { width: 40px; height: 40px; margin-bottom: 2.5rem; }
+.thanks__mark .mark__sq { width: 26px; height: 26px; }
+.thanks__mark .mark__sq--back { top: 9px; left: 9px; }
+
+.thanks__title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 5vw, 56px);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.thanks__body {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.9;
+  max-width: 460px;
+  margin-bottom: 2.5rem;
+}
