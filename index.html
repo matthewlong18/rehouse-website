@@ -319,9 +319,13 @@
          The Tally form and the Calendly link are both configured in
          js/config.js — you don't edit anything in here.
 
-         Until a Tally form ID is set, the "Email Andrew" button shows
-         instead (pre-filled with the property questions), so the page
-         always has a working contact path.
+         The form opens in a modal rather than sitting inline. Tally's
+         free plan fixes its own type size and 700px page width, which
+         looks oversized squeezed into this narrow column. A modal gives
+         it the room it was designed for and keeps this panel on-brand.
+
+         With no Tally form ID set, the button falls back to a pre-filled
+         email to Andrew, so the page always has a working contact path.
          ========================================================== -->
     <div class="panel">
       <p class="panel__eyebrow">Get in touch</p>
@@ -331,19 +335,11 @@
         back with an honest read on what's possible.
       </p>
 
-      <!-- Live Tally form — hidden until config.js has a form ID -->
-      <div class="tally-slot">
-        <iframe
-          data-tally-src=""
-          loading="lazy" width="100%" height="420" frameborder="0"
-          marginheight="0" marginwidth="0"
-          title="Book a discovery call with Re House"></iframe>
-      </div>
-
-      <!-- Email fallback — works with no JavaScript at all -->
-      <div class="panel__fallback">
-        <a class="panel__button" href="mailto:andrew@rehouseto.ca?subject=Discovery%20call%20%E2%80%94%20Re%20House&body=Hi%20Andrew%2C%0D%0A%0D%0AI%27d%20like%20to%20book%20a%20discovery%20call%20about%20selling%20my%20home.%0D%0A%0D%0AProperty%20address%3A%20%0D%0AProperty%20type%3A%20%0D%0AEstimated%20timeline%3A%20%0D%0ABest%20number%20to%20reach%20me%3A%20%0D%0A%0D%0AThanks%2C%0D%0A">Email Andrew</a>
-      </div>
+      <!-- Opens the Tally form in a modal. js/main.js rewires this button
+           to the form when a Tally ID is configured; with none set it stays
+           a pre-filled email and still works with JavaScript disabled. -->
+      <a class="panel__button" data-contact-button
+         href="mailto:andrew@rehouseto.ca?subject=Discovery%20call%20%E2%80%94%20Re%20House&body=Hi%20Andrew%2C%0D%0A%0D%0AI%27d%20like%20to%20book%20a%20discovery%20call%20about%20selling%20my%20home.%0D%0A%0D%0AProperty%20address%3A%20%0D%0AProperty%20type%3A%20%0D%0AEstimated%20timeline%3A%20%0D%0ABest%20number%20to%20reach%20me%3A%20%0D%0A%0D%0AThanks%2C%0D%0A">Email Andrew</a>
 
       <p class="panel__note">Replies within one business day.</p>
 
