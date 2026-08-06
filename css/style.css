@@ -701,19 +701,8 @@ select:focus-visible {
   letter-spacing: 0.08em;
 }
 
-/* --- Tally form slot ---------------------------------------------------
-   The embed stays hidden and the email fallback shows until a real Tally
-   form ID is set in js/config.js. js/main.js then adds .is-tally-live to
-   the panel, which flips the two.
-   --------------------------------------------------------------------- */
-.tally-slot { display: none; }
-.tally-slot iframe {
-  display: block;
-  width: 100%;
-  border: 0;
-}
-.panel.is-tally-live .tally-slot     { display: block; }
-.panel.is-tally-live .panel__fallback { display: none; }
+/* The enquiry form opens in a Tally modal (see js/main.js), so there is
+   no embedded iframe to style here. The button above is the trigger. */
 
 
 /* ==========================================================================
