@@ -19,11 +19,11 @@ const RE_HOUSE_CONFIG = {
      button instead (pre-filled with the property questions), so the
      page always has a working contact path.
      ------------------------------------------------------------------ */
-  tallyFormId: '',
+  tallyFormId: 'Me27XM',
 
   /* Starting height of the embedded form in pixels. It auto-resizes to
      fit once Tally's script loads, so this is just the initial value. */
-  tallyHeight: 420,
+  tallyHeight: 620,
 
 
   /* ------------------------------------------------------------------

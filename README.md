@@ -147,7 +147,11 @@ just run on the `github.io` address.
 
 ## Still to do
 
-- [ ] Paste the Tally form ID into `js/config.js`
+- [x] Tally form built and wired in (`Me27XM` — "Tell us about your home")
+- [ ] **Hit Publish in Tally** — the form is still a draft, so the embed
+      will not load until it is published
+- [ ] Decide whether enquiry emails should also go to `andrew@rehouseto.ca`
+      (Tally → form → Settings → Self email notifications → To)
 - [ ] Paste Andrew's booking link into `js/config.js`
 - [ ] Point the `rehouseto.ca` DNS records at GitHub Pages
 - [ ] Add real project photography (there is no gallery section yet — worth
