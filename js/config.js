@@ -21,10 +21,6 @@ const RE_HOUSE_CONFIG = {
      ------------------------------------------------------------------ */
   tallyFormId: 'Me27XM',
 
-  /* Starting height of the embedded form in pixels. It auto-resizes to
-     fit once Tally's script loads, so this is just the initial value. */
-  tallyHeight: 620,
-
 
   /* ------------------------------------------------------------------
      2. BOOKING LINK  (Calendly, Cal.com, whatever Andrew uses)

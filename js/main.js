@@ -2,7 +2,7 @@
    RE HOUSE — Main JavaScript
    --------------------------------------------------------------------------
    MODULES
-   01. Tally embed  — swaps the email fallback for the live form
+   01. Tally form   — opens the enquiry form in a modal
    02. Booking link — wires up (or hides) the Calendly line
    03. Scroll reveal
    04. Footer year
@@ -19,34 +19,44 @@
 
 
   /* ======================================================================
-     01. TALLY EMBED
-     The markup ships with the form slot hidden and the "Email Andrew"
-     button visible. Once a real form ID is configured we point the iframe
-     at it, add .is-tally-live to the panel (CSS flips which one shows),
-     and load Tally's script so the iframe auto-resizes to its content.
+     01. TALLY FORM (modal)
+     The panel button opens the form as an overlay instead of embedding it
+     inline. Tally's free plan locks its own type scale and 700px page
+     width, which reads as oversized inside this narrow column — a modal
+     gives the form the width it was designed for and leaves the panel's
+     own typography untouched.
+
+     With no form ID configured the button stays a pre-filled mailto, so
+     the page still has a working contact path.
      ====================================================================== */
-  function initTallyEmbed() {
-    const slot = document.querySelector('.tally-slot');
-    if (!slot) return;
+  function initTallyForm() {
+    const button = document.querySelector('[data-contact-button]');
+    if (!button) return;
 
     const formId = (config.tallyFormId || '').trim();
-    if (!formId) return;   // no ID yet — leave the email fallback showing
+    if (!formId) return;   // leave the email fallback in place
 
-    const iframe = slot.querySelector('iframe');
-    if (!iframe) return;
+    button.textContent = 'Book a discovery call';
+    button.removeAttribute('href');
+    button.setAttribute('role', 'button');
+    button.setAttribute('tabindex', '0');
+    button.style.cursor = 'pointer';
 
-    iframe.src = 'https://tally.so/embed/' + encodeURIComponent(formId) +
-                 '?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1';
-    if (config.tallyHeight) iframe.height = config.tallyHeight;
-
-    const panel = slot.closest('.panel');
-    if (panel) panel.classList.add('is-tally-live');
+    // Tally reads these attributes and handles the overlay itself
+    button.setAttribute('data-tally-open', formId);
+    button.setAttribute('data-tally-layout', 'modal');
+    button.setAttribute('data-tally-width', '700');
+    button.setAttribute('data-tally-overlay', '1');
+    button.setAttribute('data-tally-hide-title', '1');
 
     const script = document.createElement('script');
     script.src = 'https://tally.so/widgets/embed.js';
     script.async = true;
-    script.onload = function () {
-      if (window.Tally) window.Tally.loadEmbeds();
+    // If Tally can't load, send people to the hosted form rather than nowhere
+    script.onerror = function () {
+      button.setAttribute('href', 'https://tally.so/r/' + encodeURIComponent(formId));
+      button.setAttribute('target', '_blank');
+      button.setAttribute('rel', 'noopener');
     };
     document.body.appendChild(script);
   }
@@ -118,7 +128,7 @@
      BOOT
      ====================================================================== */
   document.addEventListener('DOMContentLoaded', function () {
-    initTallyEmbed();
+    initTallyForm();
     initBookingLink();
     initScrollReveal();
     initFooterYear();
