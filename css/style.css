@@ -574,7 +574,9 @@ select:focus-visible {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: start;
+  /* Both columns run the full height of the taller one, so neither side
+     ends in a patch of dead space. See "Positioning line" below. */
+  align-items: stretch;
 }
 
 .contact__body {
@@ -609,10 +611,56 @@ select:focus-visible {
   line-height: 1.6;
 }
 
+/* --- Positioning line -----------------------------------------------------
+   The left column is stretched to the full height of the form panel beside
+   it, and the quote is given automatic margins top and bottom. That makes it
+   centre itself in whatever space is left over under the checklist. If the
+   two columns ever end up the same height, the auto margins collapse to
+   nothing and the quote simply sits below the checklist as normal.
+   -------------------------------------------------------------------------- */
+.contact > .reveal {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+.contact__quote {
+  margin-block: auto;
+  padding-top: 2.5rem;
+  max-width: 26ch;
+}
+.contact__quote p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 2rem;
+  line-height: 1.32;
+  color: var(--black);
+  margin-bottom: 1.4rem;
+}
+.contact__quote footer {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+.contact__quote-rule {
+  display: block;
+  width: 44px;
+  height: 1px;
+  background: var(--tan);
+  margin-bottom: 0.9rem;
+}
+
 /* --- Dark contact panel --- */
 .panel {
   background: var(--black);
   padding: 2.75rem;
+  /* Column layout, contents optically centred, so the panel still reads
+     as deliberate when it is stretched taller than its own content. */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .panel__eyebrow {

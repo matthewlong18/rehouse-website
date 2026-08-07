@@ -39,6 +39,11 @@
   }
   .concept__aside { padding-top: 0; }
 
+  /* Stacked, so there is no leftover space to centre the quote in — it
+     just sits under the checklist with a fixed gap. */
+  .contact__quote { margin-block: 0; padding-top: 2rem; max-width: 30ch; }
+  .contact__quote p { font-size: 1.75rem; }
+
   /* Service tiers stack so pricing stays readable */
   .tiers { grid-template-columns: 1fr; }
 
@@ -125,6 +130,7 @@
   .tier { padding: 2rem 1.5rem; }
 
   .concept__pullquote { font-size: 19px; }
+  .contact__quote p   { font-size: 1.5rem; }
 }
 
 
