@@ -15,17 +15,13 @@ const RE_HOUSE_CONFIG = {
        2. Hit "Share" and copy the link, e.g.  https://tally.so/r/mZ1a4B
        3. The bit after /r/ is the ID — paste it below.
 
-     The booking section shows real fields either way. This only decides
-     where the answers go when someone submits:
+     The booking section embeds this form on the page so people submit
+     without leaving the site.
 
-       filled in -> the Tally form opens pre-filled
-       empty     -> a pre-written email to the address below opens instead
+       filled in -> the Tally form is shown in the booking section
+       empty     -> a fallback form opens a pre-written email instead
 
-     Pre-fill is not automatic. In Tally you must add a HIDDEN FIELD for
-     each answer, named exactly: name, email, phone, address, timeline —
-     then bind each visible question to its hidden field under "Default
-     answer". The names are case-sensitive. Miss this and the form opens
-     blank and people retype everything.
+     The form must be published in Tally or the embed will be blank.
      ------------------------------------------------------------------ */
   tallyFormId: 'Me27XM',
 

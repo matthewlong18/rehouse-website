@@ -4,7 +4,7 @@
    MODULES
    01. Hero video   — swaps the still for a loop when one is configured
    02. Nav          — transparent over the hero, bone once past it
-   03. Enquiry form — carries the answers to Tally, or to email
+   03. Enquiry form — embeds Tally on the page, or falls back to email
    04. Booking link — wires up (or hides) the "book directly" line
    05. Sticky CTA   — the phone-only bar that slides up past the hero
    06. Before/after tiles — tap to peek on touch screens
@@ -90,44 +90,65 @@
 
   /* ======================================================================
      03. ENQUIRY FORM
-     There is no server behind a GitHub Pages site, so the form cannot POST
-     anywhere. Instead it collects the answers and hands them off:
+     There is no server behind a GitHub Pages site, so submissions go
+     through Tally's embed on this page.
 
-       · a Tally form ID configured  -> open Tally with the fields pre-filled
+       · a Tally form ID configured  -> show the form here and let it submit
        · otherwise                   -> a pre-written email to Andrew
 
-     Either way the visitor never types the same thing twice.
-
-     NOTE on the Tally route: pre-fill needs HIDDEN FIELDS in the Tally form
-     named exactly as the keys sent below (name, email, phone, address,
-     timeline), each bound to its question as the "Default answer". Labels
-     alone do nothing. Leave tallyFormId empty and the email route is used
-     instead — that one always works.
+     The old path opened Tally in a new tab after people had already filled
+     the on-site fields. That is gone on purpose.
      ====================================================================== */
   function initEnquiryForm() {
-    const form = document.querySelector('[data-enquiry-form]');
-    if (!form) return;
+    const formId   = (config.tallyFormId || '').trim();
+    const panel    = document.querySelector('[data-enquiry-panel]');
+    const slot     = document.querySelector('[data-tally-slot]');
+    const fallback = document.querySelector('[data-enquiry-form]');
 
-    const errorLine = form.querySelector('[data-enquiry-error]');
+    if (formId && slot) {
+      const iframe = slot.querySelector('iframe');
+      if (iframe) {
+        const src = 'https://tally.so/embed/' + encodeURIComponent(formId) +
+                    '?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1';
+        iframe.setAttribute('data-tally-src', src);
+        iframe.src = src;
+      }
+
+      slot.hidden = false;
+      if (fallback) fallback.hidden = true;
+      if (panel) panel.classList.add('is-tally-live');
+
+      const script = document.createElement('script');
+      script.src = 'https://tally.so/widgets/embed.js';
+      script.async = true;
+      script.onload = function () {
+        if (window.Tally) window.Tally.loadEmbeds();
+      };
+      document.body.appendChild(script);
+      return;
+    }
+
+    if (!fallback) return;
+
+    const errorLine = fallback.querySelector('[data-enquiry-error]');
     const required  = ['name', 'email', 'address'];
 
     function value(field) {
-      const el = form.elements[field];
+      const el = fallback.elements[field];
       return el ? el.value.trim() : '';
     }
 
     function markInvalid() {
       let firstBad = null;
       required.forEach(function (field) {
-        const el = form.elements[field];
+        const el = fallback.elements[field];
         if (!el) return;
         const bad = !el.value.trim();
         el.closest('.field').classList.toggle('is-invalid', bad);
         if (bad && !firstBad) firstBad = el;
       });
 
-      // An email that is filled in but obviously not an email
-      const email = form.elements.email;
+      const email = fallback.elements.email;
       if (email && email.value.trim() && email.value.indexOf('@') === -1) {
         email.closest('.field').classList.add('is-invalid');
         if (!firstBad) firstBad = email;
@@ -135,13 +156,12 @@
       return firstBad;
     }
 
-    // Clear a field's error state as soon as they start fixing it
-    form.addEventListener('input', function (e) {
+    fallback.addEventListener('input', function (e) {
       const field = e.target.closest('.field');
       if (field) field.classList.remove('is-invalid');
     });
 
-    form.addEventListener('submit', function (e) {
+    fallback.addEventListener('submit', function (e) {
       e.preventDefault();
 
       const firstBad = markInvalid();
@@ -152,34 +172,12 @@
       }
       if (errorLine) errorLine.hidden = true;
 
-      const answers = {
-        name:     value('name'),
-        email:    value('email'),
-        phone:    value('phone'),
-        address:  value('address'),
-        timeline: value('timeline')
-      };
-
-      const formId = (config.tallyFormId || '').trim();
-
-      if (formId) {
-        // Tally pre-fills from query parameters whose names match its fields
-        const params = Object.keys(answers)
-          .filter(function (k) { return answers[k]; })
-          .map(function (k) { return k + '=' + encodeURIComponent(answers[k]); })
-          .join('&');
-        window.open('https://tally.so/r/' + encodeURIComponent(formId) + '?' + params,
-                    '_blank', 'noopener');
-        return;
-      }
-
-      // No form configured: hand it to the mail client, fully written out
       const body =
-        'Name: ' + answers.name + '\r\n' +
-        'Email: ' + answers.email + '\r\n' +
-        'Phone: ' + (answers.phone || '—') + '\r\n' +
-        'Property address: ' + answers.address + '\r\n' +
-        'Timeline to sell: ' + (answers.timeline || '—') + '\r\n';
+        'Name: ' + value('name') + '\r\n' +
+        'Email: ' + value('email') + '\r\n' +
+        'Phone: ' + (value('phone') || '—') + '\r\n' +
+        'Property address: ' + value('address') + '\r\n' +
+        'Timeline to sell: ' + (value('timeline') || '—') + '\r\n';
 
       window.location.href =
         'mailto:' + (config.email || 'andrew@rehouseto.ca') +

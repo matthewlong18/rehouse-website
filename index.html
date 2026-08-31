@@ -382,10 +382,9 @@
   <!-- ============================================================
        BOOKING
        --------------------------------------------------------------
-       A real form, but there is no server behind a GitHub Pages site.
-       So on submit main.js carries the answers to whichever channel is
-       configured in js/config.js: the Tally form pre-filled, or a
-       pre-written email to Andrew. Nobody retypes anything.
+       The Tally form is embedded here so people submit on this page.
+       js/config.js holds the form ID. With none set, the email fallback
+       form still works.
        ============================================================ -->
   <section class="band band--black" id="book">
     <div class="wrap reveal">
@@ -394,52 +393,51 @@
 
       <div class="booking__grid">
 
-        <!-- The visible enquiry form. It has no server behind it — this is a
-             static site — so main.js takes the answers and either opens the
-             Tally form pre-filled, or falls back to a pre-written email.
-             Either way nothing is typed twice. -->
-        <form class="enquiry" data-enquiry-form novalidate>
-          <div class="field">
-            <label for="f-name">Name</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required>
-          </div>
-          <div class="field">
-            <label for="f-email">Email</label>
-            <input id="f-email" name="email" type="email" autocomplete="email" required>
-          </div>
-          <div class="field">
-            <label for="f-phone">Phone</label>
-            <input id="f-phone" name="phone" type="tel" autocomplete="tel">
-          </div>
-          <div class="field">
-            <label for="f-address">Property address</label>
-            <input id="f-address" name="address" type="text" autocomplete="street-address" required>
-          </div>
-          <div class="field">
-            <label for="f-timeline">When are you looking to sell?</label>
-            <!-- These four strings must match the Tally answer options EXACTLY,
-                 character for character — that is how the pre-fill finds them.
-                 Plain hyphens and no apostrophes on purpose: curly quotes and
-                 en-dashes survive a URL badly. Change one, change both. -->
-            <select id="f-timeline" name="timeline">
-              <option value="">Choose one</option>
-              <option>As soon as it is ready</option>
-              <option>In the next 3-6 months</option>
-              <option>In the next 6-12 months</option>
-              <option>Just exploring</option>
-            </select>
+        <div class="enquiry" data-enquiry-panel>
+          <div class="tally-slot" data-tally-slot hidden>
+            <iframe loading="lazy" width="100%" height="520" title="Book a walkthrough"></iframe>
           </div>
 
-          <p class="field__error" data-enquiry-error hidden>Please add your name, email and the property address.</p>
+          <!-- Shown only when no Tally form ID is set in js/config.js -->
+          <form class="enquiry__fallback" data-enquiry-form novalidate>
+            <div class="field">
+              <label for="f-name">Name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="f-phone">Phone</label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel">
+            </div>
+            <div class="field">
+              <label for="f-address">Property address</label>
+              <input id="f-address" name="address" type="text" autocomplete="street-address" required>
+            </div>
+            <div class="field">
+              <label for="f-timeline">When are you looking to sell?</label>
+              <select id="f-timeline" name="timeline">
+                <option value="">Choose one</option>
+                <option>As soon as it is ready</option>
+                <option>In the next 3-6 months</option>
+                <option>In the next 6-12 months</option>
+                <option>Just exploring</option>
+              </select>
+            </div>
 
-          <button class="btn" type="submit" data-contact-button>Book a walkthrough</button>
-          <p class="btn-note">Replies within one business day</p>
+            <p class="field__error" data-enquiry-error hidden>Please add your name, email and the property address.</p>
+
+            <button class="btn" type="submit" data-contact-button>Book a walkthrough</button>
+            <p class="btn-note">Replies within one business day</p>
+          </form>
 
           <p class="enquiry__alt">
             <span data-booking-link-wrap hidden>Prefer to pick a time? <a href="#" data-booking-link>Book directly</a><br></span>
             Or call Andrew on <a href="tel:+16473094770">647-309-4770</a>.
           </p>
-        </form>
+        </div>
 
         <div class="walkthrough">
           <h3>What happens on the walkthrough</h3>

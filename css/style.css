@@ -1042,6 +1042,26 @@ p + p {
   padding: 2.5rem 2.25rem;
 }
 
+/* Tally sits on bone so its default type stays readable on the black band */
+.enquiry.is-tally-live {
+  background: var(--bone);
+  border-color: var(--bone);
+  padding: 0.5rem 0.35rem 1.5rem;
+}
+
+.tally-slot iframe {
+  display: block;
+  width: 100%;
+  min-height: 480px;
+  border: 0;
+}
+
+.enquiry.is-tally-live .enquiry__alt {
+  color: var(--charcoal);
+  padding: 0 1.5rem;
+}
+.enquiry.is-tally-live .enquiry__alt a { color: var(--black); }
+
 .field { margin-bottom: 1.25rem; }
 
 .field label {
