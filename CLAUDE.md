@@ -57,8 +57,16 @@ Two things that look harmless and both break it:
    with light label text. On a bone or white panel every question goes
    invisible. The panel is transparent so the form sits on the black band.
 
-There's a 4-second fallback: if Tally's widget script never loads, the iframe
-loads directly so the booking section is never an empty box.
+There's a fallback so the booking section is never an empty box: if Tally's
+widget script doesn't load, the iframe loads directly instead. A blocked or
+offline script is caught by the script's own error handler and falls back in
+about a second; an 8-second timer covers the rarer case of a request that
+hangs without ever loading or failing.
+
+Only one of those two paths is ever allowed to touch the iframe — a `settled`
+latch decides. That matters because of gotcha 1 above: if the fallback set the
+src while the widget was merely *slow*, the widget would arrive, skip the
+iframe, and drop the form straight back into the scroll box.
 
 If the form ID is ever blanked out in `js/config.js`, the hand-written fields
 come back and submit as a pre-written email to Andrew instead.
