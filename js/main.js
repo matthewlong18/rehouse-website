@@ -107,12 +107,13 @@
 
     if (formId && slot) {
       const iframe = slot.querySelector('iframe');
-      if (iframe) {
-        const src = 'https://tally.so/embed/' + encodeURIComponent(formId) +
-                    '?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1';
-        iframe.setAttribute('data-tally-src', src);
-        iframe.src = src;
-      }
+      const src = 'https://tally.so/embed/' + encodeURIComponent(formId) +
+                  '?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1';
+
+      // Only data-tally-src, never src. Tally's widget skips any iframe that
+      // already has a src, and skipping it is what leaves the form stuck in a
+      // 520px scroll box instead of growing to its full height.
+      if (iframe) iframe.setAttribute('data-tally-src', src);
 
       slot.hidden = false;
       if (fallback) fallback.hidden = true;
@@ -125,6 +126,14 @@
         if (window.Tally) window.Tally.loadEmbeds();
       };
       document.body.appendChild(script);
+
+      // If the widget script never arrives, load the form the plain way so the
+      // booking section is never just an empty box.
+      window.setTimeout(function () {
+        if (!window.Tally && iframe && !iframe.getAttribute('src')) {
+          iframe.src = src;
+        }
+      }, 4000);
       return;
     }
 
