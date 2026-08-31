@@ -7,21 +7,21 @@
   <!-- ============================================================
        SEO
        ============================================================ -->
-  <title>Re House — Toronto Pre-Sale Design Studio</title>
-  <meta name="description" content="Re House reframes your home before the market sees it. Strategic pre-sale renovation, AI visualization, and editorial listings across Toronto and the GTA.">
+  <title>Re House — Design. Renovate. List. | Toronto &amp; the GTA</title>
+  <meta name="description" content="One team handles the design, the renovation, and the listing — so your Toronto home reaches the market as the best version of itself. Book a free walkthrough.">
   <meta name="author" content="Re House">
   <link rel="canonical" href="https://rehouseto.ca/">
 
   <!-- Social sharing (Open Graph + Twitter) -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Re House — Toronto Pre-Sale Design Studio">
-  <meta property="og:description" content="We reframe your home before the market sees it. Strategic renovation, AI-powered visualization, editorial listings — one seamless process from first call to closing.">
+  <meta property="og:title" content="Re House — Design. Renovate. List.">
+  <meta property="og:description" content="We renovate homes before we sell them. One team handles the design, the build, and the listing across Toronto and the GTA.">
   <meta property="og:url" content="https://rehouseto.ca/">
   <meta property="og:image" content="https://rehouseto.ca/assets/images/rehouse-logo-square-dark.jpg">
   <meta property="og:locale" content="en_CA">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Re House — Toronto Pre-Sale Design Studio">
-  <meta name="twitter:description" content="We reframe your home before the market sees it.">
+  <meta name="twitter:title" content="Re House — Design. Renovate. List.">
+  <meta name="twitter:description" content="We renovate homes before we sell them.">
   <meta name="twitter:image" content="https://rehouseto.ca/assets/images/rehouse-logo-square-dark.jpg">
   <meta name="theme-color" content="#2A2420">
 
@@ -50,7 +50,7 @@
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
     "name": "Re House",
-    "description": "Pre-sale design and renovation studio preparing Toronto and GTA homes for market.",
+    "description": "Pre-sale design, renovation and listing service for homeowners across Toronto and the GTA. One team handles the design, the build, and the sale.",
     "url": "https://rehouseto.ca/",
     "email": "andrew@rehouseto.ca",
     "telephone": "+1-647-309-4770",
@@ -81,286 +81,374 @@
     <span class="wordmark__rule"></span>
     <span class="wordmark__house">House</span>
   </a>
-  <a href="#contact" class="nav__cta">Book a consult</a>
+  <div class="nav__links">
+    <a href="#process" class="nav__link">Process</a>
+    <a href="#scope" class="nav__link">Scope</a>
+    <a href="#project" class="nav__link">Project</a>
+    <a href="#book" class="nav__cta">Book a walkthrough</a>
+  </div>
 </nav>
 
 <main id="main">
 
   <!-- ============================================================
        HERO
+       --------------------------------------------------------------
+       Full-bleed still of the finished house, with the pitch over it.
+
+       TO ADD THE VIDEO LATER: drop the file in assets/video/ and put
+       its path in js/config.js as heroVideo. Nothing here changes —
+       main.js swaps the still for the loop, and only on desktop. The
+       still below is the video's poster frame, so it stays either way.
        ============================================================ -->
   <section class="hero" id="top">
-    <div class="hero__left">
-      <div class="hero__spacer"></div>
 
-      <div>
-        <span class="wordmark">
-          <span class="wordmark__re">Re</span>
-          <span class="wordmark__rule"></span>
-          <span class="wordmark__house">House</span>
-        </span>
-        <div class="hero__rule"></div>
-        <p class="hero__left-body">
-          Pre-Sale Design<br>
-          &amp; Renovation Studio<br>
-          Toronto, Ontario
-        </p>
-      </div>
+    <div class="hero__media" data-hero-media
+         style="background-image:url('assets/images/381-westmoreland-hero-entry.jpg')"
+         role="img" aria-label="The finished entry and staircase at 381 Westmoreland Ave N"></div>
+    <div class="hero__scrim"></div>
 
-      <div class="hero__left-foot">
-        <span class="hero__left-foot-text">rehouseto.ca</span>
+    <div class="hero__inner">
+      <div class="wrap">
+        <p class="eyebrow anim">Design &middot; Renovate &middot; List</p>
+        <h1><span class="hero__line">The market only</span><span class="hero__line">sees it <em>once.</em></span></h1>
+        <div class="rule-tan anim"></div>
+        <p class="hero__sub anim">First impressions are priced in, and nobody bids on potential.
+          We renovate before we list, so the house that reaches the market is finished
+          &mdash; design, build and sale by one team.</p>
+        <div class="anim">
+          <a class="btn" href="#book">Book a walkthrough</a>
+          <p class="btn-note">Free &middot; No obligation &middot; About 45 minutes</p>
+        </div>
       </div>
     </div>
 
-    <div class="hero__right">
-      <span class="hero__watermark" aria-hidden="true">RH</span>
-      <p class="hero__eyebrow">Toronto Pre-Sale Design Studio</p>
-      <h1 class="hero__title">
-        We reframe your home <br class="break-desktop">before the market <em>sees it.</em>
-      </h1>
-      <div class="hero__accent"></div>
-      <p class="hero__sub">
-        Strategic renovations. AI-powered visualization. Editorial listings.
-        One seamless process from first call to closing.
+  </section>
+
+
+  <!-- ============================================================
+       STAGES — Design / Renovate / List
+       ============================================================ -->
+  <section class="band band--bone" id="process">
+    <div class="wrap reveal">
+      <p class="eyebrow">How it works</p>
+      <h2>Design. Renovate. <em>List.</em></h2>
+      <div class="rule-tan"></div>
+      <p class="lede">Three stages, one team, one timeline. Nothing is handed off to a stranger halfway through.</p>
+
+      <div class="stages">
+        <div class="stage">
+          <div class="stage__number">Stage One</div>
+          <div class="stage__name">Design</div>
+          <p>We walk the house together and decide what is genuinely worth doing. You receive a scoped plan with costs before anything begins.</p>
+        </div>
+        <div class="stage">
+          <div class="stage__number">Stage Two</div>
+          <div class="stage__name">Renovate</div>
+          <p>Our trades carry out the work on a set schedule. One point of contact throughout, with updates as it moves. No chasing subs.</p>
+        </div>
+        <div class="stage">
+          <div class="stage__number">Stage Three</div>
+          <div class="stage__name">List</div>
+          <p>Staging, photography, pricing, and the sale. The person who built it is the person who sells it.</p>
+        </div>
+      </div>
+
+      <p class="stages__foot"><a class="textlink" href="#book">See what your home needs</a></p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SCOPE SHEET — what we do and don't touch
+       ============================================================ -->
+  <section class="band band--pebble" id="scope">
+    <div class="wrap reveal">
+      <p class="eyebrow">Scope &amp; cost</p>
+      <h2>We don't renovate <em>everything.</em></h2>
+      <div class="rule-tan"></div>
+      <p class="lede">Most homes need only a handful of changes to move the needle on price. We find those, do them well, and leave the rest alone — because every dollar spent has to return at closing.</p>
+
+      <div class="sheet">
+        <div class="sheet__bar"></div>
+
+        <div class="sheet__head">
+          <span class="sheet__head-left">Typical scope</span>
+          <span class="sheet__head-right">Sample — every home differs</span>
+        </div>
+
+        <div class="sheet__cols">
+          <div class="sheet__col sheet__col--keep">
+            <div class="sheet__label">Usually worth doing</div>
+            <ul>
+              <li>Kitchen refresh — cabinets, counters, hardware</li>
+              <li>Paint throughout</li>
+              <li>Flooring in the main living areas</li>
+              <li>Lighting and fixtures</li>
+              <li>Bathroom vanity and fittings</li>
+              <li>Curb appeal and landscaping</li>
+            </ul>
+          </div>
+          <div class="sheet__col sheet__col--skip">
+            <div class="sheet__label">Usually not</div>
+            <ul>
+              <li>Full kitchen gut and rebuild</li>
+              <li>Finishing the basement</li>
+              <li>Window replacement</li>
+              <li>Roof, unless the inspection flags it</li>
+              <li>Primary suite additions</li>
+              <li>High-end appliance packages</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sheet__foot">
+          A typical split, not a rule. We scope to what returns at sale for your home, your street, and your timeline.
+        </div>
+      </div>
+
+      <p class="scope__close">You receive the plan and the costs before any work starts. And if paying for it upfront does not work for you, we will walk you through the options.</p>
+      <div class="scope__cta"><a class="btn" href="#book">Book a walkthrough</a></div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       THE PROJECT — 381 Westmoreland
+       --------------------------------------------------------------
+       The finished house, with the job's three numbers over it.
+
+       TO SWAP IN A NEW PROJECT: change the photo, the address and the
+       four figures. Each figure's data-count attribute is what counts up,
+       so change the number in BOTH places — the attribute and the text. The footnote must always name what the estimate is
+       measured against — comparable unrenovated properties in the area —
+       because without it the return figure is unsupportable.
+
+       NOTE: advertising a specific sold price needs the seller's written
+       consent under TRESA. Confirm that is on file before this goes live.
+       ============================================================ -->
+  <section id="project">
+    <div class="project-lead"
+         style="background-image:url('assets/images/381-westmoreland-front-finished.jpg')"
+         role="img" aria-label="381 Westmoreland Ave N after the renovation">
+      <div class="project-lead__overlay">
+        <div class="wrap">
+          <p class="project-lead__addr">381 Westmoreland Ave N &middot; Toronto</p>
+          <h2 class="project-lead__head">We renovated it.<br>Then we <em>sold it.</em></h2>
+
+          <dl class="stats">
+            <div class="stat">
+              <dt class="stat__label">Build time</dt>
+              <dd class="stat__value"><span data-count="9">9</span> weeks</dd>
+            </div>
+            <div class="stat">
+              <dt class="stat__label">Invested in the work</dt>
+              <dd class="stat__value">$<span data-count="37000">37,000</span></dd>
+            </div>
+            <div class="stat">
+              <dt class="stat__label">Sold in</dt>
+              <dd class="stat__value"><span data-count="5">5</span> days</dd>
+            </div>
+            <div class="stat stat--lead">
+              <dt class="stat__label">Estimated return</dt>
+              <dd class="stat__value">$<span data-count="113000">113,000</span><span class="stat__mark">*</span></dd>
+            </div>
+          </dl>
+
+          <p class="project-lead__note">*Comparable unrenovated properties in the area were
+            selling around $1,200,000. This house sold at $1,350,000 &mdash; a difference of
+            $150,000, or $113,000 once the cost of the work is taken out.</p>
+
+          <div class="project-lead__cta"><a class="btn" href="#book">Book a walkthrough</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---- BEFORE / AFTER TILES ----
+         Two photos stacked per tile. The finished shot is on top; hover it
+         on a laptop, or tap it on a phone, and it fades to the before.
+         To add a pair, copy one .reveal-tile and swap the two image paths. -->
+    <div class="pairs reveal">
+      <p class="pairs__label">Same corner, before and after</p>
+
+      <div class="reveal-grid">
+        <div class="reveal-tile">
+          <div class="reveal-tile__img"
+               style="background-image:url('assets/images/381-westmoreland-bathroom-before.jpg')"
+               role="img" aria-label="The bathroom before the renovation"></div>
+          <div class="reveal-tile__img reveal-tile__img--after"
+               style="background-image:url('assets/images/381-westmoreland-bathroom-after.jpg')"
+               role="img" aria-label="The same bathroom after the renovation"></div>
+          <span class="reveal-tile__cap">The bathroom</span>
+        </div>
+
+        <div class="reveal-tile">
+          <div class="reveal-tile__img"
+               style="background-image:url('assets/images/381-westmoreland-living-before.jpg')"
+               role="img" aria-label="The living room before the renovation"></div>
+          <div class="reveal-tile__img reveal-tile__img--after"
+               style="background-image:url('assets/images/381-westmoreland-living-after.jpg')"
+               role="img" aria-label="The same living room after the renovation"></div>
+          <span class="reveal-tile__cap">The living room</span>
+        </div>
+
+        <div class="reveal-tile">
+          <div class="reveal-tile__img"
+               style="background-image:url('assets/images/381-westmoreland-front-before.jpg')"
+               role="img" aria-label="The front of the house before the renovation"></div>
+          <div class="reveal-tile__img reveal-tile__img--after"
+               style="background-image:url('assets/images/381-westmoreland-front-after.jpg')"
+               role="img" aria-label="The front of the house after the renovation"></div>
+          <span class="reveal-tile__cap">The front</span>
+        </div>
+      </div>
+
+      <p class="pairs__hint">
+        <span class="pairs__hint--pointer">Hover a photo to see what was there before.</span>
+        <span class="pairs__hint--touch">Tap a photo to see it before.</span>
       </p>
-      <div class="hero__buttons">
-        <a href="#contact" class="btn-primary">Book a discovery call</a>
-        <a href="#process" class="btn-ghost">How it works</a>
+    </div>
+  </section>
+
+
+  <!-- ---- THE NOTE ---- -->
+  <section class="band band--pebble">
+    <div class="wrap wrap--narrow reveal">
+      <p class="eyebrow">From the last job</p>
+      <h2>What we actually <em>did.</em></h2>
+      <div class="rule-tan"></div>
+
+      <div class="note">
+        <div class="note__body">
+          <p>The house had original windows, wiring that was overdue, and a bathroom nobody had touched in decades. Good bones, good street &mdash; it just hadn't been looked after.</p>
+          <p>We scoped what was worth doing and left the rest alone. Windows, electrical, the bathroom, finishes throughout. No basement, no kitchen gut, no addition.</p>
+          <p><em>Now, the honest part.</em> That $113,000 isn't all renovation. Some of it is the work, and some of it is how the street was priced going in &mdash; and anyone who tells you otherwise is selling something.</p>
+
+          <div class="note__kicker">
+            <p>Which is exactly the conversation we'd have about your house. On the walkthrough I'll tell you what the work is likely to return, what it isn't, and whether it's worth doing at all. Sometimes the answer is to list it as-is, and I'll say so.</p>
+            <p class="note__sig">Andrew Long &middot; Realtor&reg;</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
 
   <!-- ============================================================
-       CONCEPT / PHILOSOPHY
+       FAQ
        ============================================================ -->
-  <div class="accent-bar"></div>
-  <section class="section concept">
-    <div class="reveal">
-      <p class="eyebrow">Our philosophy</p>
-      <h2 class="h2 h2--gap">The homes that show well are selling. The rest are leaving money behind.</h2>
-      <p class="concept__body">
-        In today's Toronto market, the gap between a designed home and an as-is listing
-        isn't just aesthetic — it's measurable. Buyers pay a premium for homes that feel
-        finished, intentional, and move-in ready.
-      </p>
-      <p class="concept__body">
-        Re House closes that gap before your listing goes live. We handle the design,
-        the renovation, the staging, and the sale as one process — so you approve the plan,
-        then re-engage at closing. Every renovation we recommend is chosen for one reason: return.
-      </p>
-    </div>
+  <section class="band band--bone">
+    <div class="wrap wrap--narrow reveal">
+      <p class="eyebrow">Questions</p>
+      <h2>Before you <em>book.</em></h2>
 
-    <div class="concept__aside reveal">
-      <p class="concept__pullquote">Designed to sell.<br>Built to transform.</p>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       PROCESS
-       ============================================================ -->
-  <div class="accent-bar"></div>
-  <section class="process" id="process">
-    <div class="process__wrap">
-      <p class="eyebrow">How we work</p>
-      <h2 class="h2 h2--gap-xl">One seamless experience, start to close.</h2>
-
-      <div class="steps">
-        <div class="steps__spine" aria-hidden="true"></div>
-
-        <div class="step reveal">
-          <div class="step__dot"></div>
-          <div class="step__number">01</div>
-          <h3 class="step__title">Discovery</h3>
-          <div class="step__meta">Week 1</div>
-          <p class="step__body">
-            We walk your home and talk through timeline, goals, and what the market is
-            rewarding right now. No obligation.
-          </p>
-        </div>
-
-        <div class="step reveal">
-          <div class="step__dot"></div>
-          <div class="step__number">02</div>
-          <h3 class="step__title">The Re Preview</h3>
-          <div class="step__meta">Week 1–2</div>
-          <p class="step__body">
-            Photorealistic renders of two to three scenarios, so you see and approve the
-            finished result before any work begins.
-          </p>
-        </div>
-
-        <div class="step reveal">
-          <div class="step__dot"></div>
-          <div class="step__number">03</div>
-          <h3 class="step__title">Renovation</h3>
-          <div class="step__meta">Week 2–5</div>
-          <p class="step__body">
-            Our trades execute the approved plan. You don't chase contractors or compare
-            quotes — we manage every detail.
-          </p>
-        </div>
-
-        <div class="step reveal">
-          <div class="step__dot"></div>
-          <div class="step__number">04</div>
-          <h3 class="step__title">Stage &amp; shoot</h3>
-          <div class="step__meta">Week 5–6</div>
-          <p class="step__body">
-            Editorial styling, architectural photography, and cinematic video built for how
-            buyers actually browse.
-          </p>
-        </div>
-
-        <div class="step reveal">
-          <div class="step__dot"></div>
-          <div class="step__number">05</div>
-          <h3 class="step__title">List &amp; close</h3>
-          <div class="step__meta">Week 6+</div>
-          <p class="step__body">
-            Strategic MLS positioning and negotiation, handled by a licensed agent from
-            start to signature.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       SERVICES
-       ============================================================ -->
-  <div class="accent-bar"></div>
-  <section class="section" id="services">
-    <p class="eyebrow">Our services</p>
-    <h2 class="h2 h2--gap-lg">Every home receives a bespoke plan.</h2>
-
-    <div class="tiers">
-      <article class="tier reveal">
-        <div class="tier__bar"></div>
-        <div class="tier__badge">Tier I</div>
-        <h3 class="tier__name">Re Edit</h3>
-        <div class="tier__price">$8,000 – $25,000</div>
-        <div class="tier__rule"></div>
-        <ul class="tier__list">
-          <li>The Re Preview — 3 scenarios</li>
-          <li>Deep clean &amp; minor repairs</li>
-          <li>Strategic staging &amp; curation</li>
-          <li>Architectural photography &amp; video</li>
-          <li>Editorial listing copy</li>
-        </ul>
-      </article>
-
-      <article class="tier tier--featured reveal">
-        <div class="tier__bar"></div>
-        <div class="tier__badge">Tier II — Most popular</div>
-        <h3 class="tier__name">Re Renovation</h3>
-        <div class="tier__price">Nothing upfront — settle at close</div>
-        <div class="tier__rule"></div>
-        <ul class="tier__list">
-          <li>Everything in Tier I</li>
-          <li>Kitchen refresh or bathroom renovation</li>
-          <li>Paint, flooring &amp; fixture upgrade</li>
-          <li>Full contractor management</li>
-          <li>Typical scope $40,000 – $150,000</li>
-        </ul>
-      </article>
-
-      <article class="tier tier--bespoke reveal">
-        <div class="tier__bar"></div>
-        <div class="tier__badge">Tier III</div>
-        <h3 class="tier__name">Re Transformation</h3>
-        <div class="tier__price">Bespoke</div>
-        <div class="tier__rule"></div>
-        <ul class="tier__list">
-          <li>Everything in Tier II</li>
-          <li>Full interior design direction</li>
-          <li>Structural changes if required</li>
-          <li>Landscape &amp; exterior redesign</li>
-          <li>Private pre-market showings</li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       CONTACT
-       ============================================================ -->
-  <div class="accent-bar"></div>
-  <section class="section contact" id="contact">
-    <div class="reveal">
-      <p class="eyebrow">Begin the conversation</p>
-      <h2 class="h2 h2--gap-sm">Your home's transformation starts with one call.</h2>
-      <p class="contact__body">
-        Book a 30-minute discovery call. We'll walk through your property, your timeline,
-        and your goals — and give you an honest assessment of what's possible.
-      </p>
-      <div class="contact__checks">
-        <div class="contact__check">
-          <div class="contact__dash"></div>
-          <p class="contact__check-text">30-minute consultation — no obligation, no pressure</p>
-        </div>
-        <div class="contact__check">
-          <div class="contact__dash"></div>
-          <p class="contact__check-text">The Re Preview delivered within one week of approval</p>
-        </div>
-        <div class="contact__check">
-          <div class="contact__dash"></div>
-          <p class="contact__check-text">Deferred payment available — settle at close, not upfront</p>
-        </div>
+      <div class="faq">
+        <details>
+          <summary>Do I have to list with you if you do the renovation?</summary>
+          <div class="faq__answer">The combined service is how we keep the scope honest — we only recommend work we would stand behind at sale. If you would rather renovate now and decide about listing later, say so on the walkthrough and we will talk through how that works.</div>
+        </details>
+        <details>
+          <summary>What if I would rather sell as-is?</summary>
+          <div class="faq__answer">Then we list it as-is. Some homes genuinely do not need the work, and we will tell you when yours is one of them.</div>
+        </details>
+        <details>
+          <summary>Who pays for the renovation?</summary>
+          <div class="faq__answer">Most of our clients do not fund it out of pocket. The right route depends on your equity and your timeline, so we go through the options on the walkthrough alongside a licensed mortgage professional rather than guessing here.</div>
+        </details>
+        <details>
+          <summary>How long does the work take?</summary>
+          <div class="faq__answer">A typical pre-sale scope is measured in weeks, not months — the exact schedule depends on what your home needs. You receive that schedule with the plan, before anything starts, so it can be built around your move.</div>
+        </details>
+        <details>
+          <summary>Do I need to move out?</summary>
+          <div class="faq__answer">Usually not for the whole job, though the kitchen and bathroom stretches are easier if you are out. We flag it in the plan so there are no surprises.</div>
+        </details>
+        <details>
+          <summary>What if the numbers do not work?</summary>
+          <div class="faq__answer">We will tell you. If the renovation will not return what it costs on your street, doing it is a poor deal for both of us.</div>
+        </details>
+        <details>
+          <summary>Where do you work?</summary>
+          <div class="faq__answer">Toronto and the greater GTA.</div>
+        </details>
       </div>
 
-      <!-- Positioning line. It sits in whatever space is left over beside
-           the form panel and vertically centres itself there — see the
-           "Positioning line" block in css/style.css, section 09. -->
-      <blockquote class="contact__quote">
-        <p>Every home has a version of itself that sells for more. Our job is to find it before the market does.</p>
-        <footer>
-          <span class="contact__quote-rule"></span>
-          Re House &mdash; Toronto
-        </footer>
-      </blockquote>
+      <div class="faq__cta"><a class="btn btn--dark" href="#book">Book a walkthrough</a></div>
     </div>
+  </section>
 
-    <!-- ==========================================================
-         CONTACT PANEL
 
-         The Tally form and the Calendly link are both configured in
-         js/config.js — you don't edit anything in here.
+  <!-- ============================================================
+       BOOKING
+       --------------------------------------------------------------
+       A real form, but there is no server behind a GitHub Pages site.
+       So on submit main.js carries the answers to whichever channel is
+       configured in js/config.js: the Tally form pre-filled, or a
+       pre-written email to Andrew. Nobody retypes anything.
+       ============================================================ -->
+  <section class="band band--black" id="book">
+    <div class="wrap reveal">
+      <p class="eyebrow">Book a walkthrough</p>
+      <h2>Start with a look <em>at the house.</em></h2>
 
-         The form opens in a modal rather than sitting inline. Tally's
-         free plan fixes its own type size and 700px page width, which
-         looks oversized squeezed into this narrow column. A modal gives
-         it the room it was designed for and keeps this panel on-brand.
+      <div class="booking__grid">
 
-         With no Tally form ID set, the button falls back to a pre-filled
-         email to Andrew, so the page always has a working contact path.
-         ========================================================== -->
-    <div class="panel">
-      <p class="panel__eyebrow">Get in touch</p>
-      <h3 class="panel__title">Tell us about your home.</h3>
-      <p class="panel__body">
-        A few details about your property and timeline is all we need. Andrew will come
-        back with an honest read on what's possible.
-      </p>
+        <!-- The visible enquiry form. It has no server behind it — this is a
+             static site — so main.js takes the answers and either opens the
+             Tally form pre-filled, or falls back to a pre-written email.
+             Either way nothing is typed twice. -->
+        <form class="enquiry" data-enquiry-form novalidate>
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="f-phone">Phone</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="f-address">Property address</label>
+            <input id="f-address" name="address" type="text" autocomplete="street-address" required>
+          </div>
+          <div class="field">
+            <label for="f-timeline">When are you looking to sell?</label>
+            <!-- These four strings must match the Tally answer options EXACTLY,
+                 character for character — that is how the pre-fill finds them.
+                 Plain hyphens and no apostrophes on purpose: curly quotes and
+                 en-dashes survive a URL badly. Change one, change both. -->
+            <select id="f-timeline" name="timeline">
+              <option value="">Choose one</option>
+              <option>As soon as it is ready</option>
+              <option>In the next 3-6 months</option>
+              <option>In the next 6-12 months</option>
+              <option>Just exploring</option>
+            </select>
+          </div>
 
-      <!-- Opens the Tally form in a modal. js/main.js rewires this button
-           to the form when a Tally ID is configured; with none set it stays
-           a pre-filled email and still works with JavaScript disabled. -->
-      <a class="panel__button" data-contact-button
-         href="mailto:andrew@rehouseto.ca?subject=Discovery%20call%20%E2%80%94%20Re%20House&body=Hi%20Andrew%2C%0D%0A%0D%0AI%27d%20like%20to%20book%20a%20discovery%20call%20about%20selling%20my%20home.%0D%0A%0D%0AProperty%20address%3A%20%0D%0AProperty%20type%3A%20%0D%0AEstimated%20timeline%3A%20%0D%0ABest%20number%20to%20reach%20me%3A%20%0D%0A%0D%0AThanks%2C%0D%0A">Email Andrew</a>
+          <p class="field__error" data-enquiry-error hidden>Please add your name, email and the property address.</p>
 
-      <p class="panel__note">Replies within one business day.</p>
+          <button class="btn" type="submit" data-contact-button>Book a walkthrough</button>
+          <p class="btn-note">Replies within one business day</p>
 
-      <div class="panel__alt">
-        <div class="panel__alt-label">Already know you want to talk?</div>
-        <div class="panel__alt-row">
-          <a class="panel__link" data-booking-link href="#" hidden>Pick a time directly <span>30 min, no obligation</span></a>
-          <a class="panel__link" href="tel:+16473094770">647-309-4770 <span>Mobile</span></a>
-          <a class="panel__link" href="tel:+14165358859">416-535-8859 <span>Office</span></a>
+          <p class="enquiry__alt">
+            <span data-booking-link-wrap hidden>Prefer to pick a time? <a href="#" data-booking-link>Book directly</a><br></span>
+            Or call Andrew on <a href="tel:+16473094770">647-309-4770</a>.
+          </p>
+        </form>
+
+        <div class="walkthrough">
+          <h3>What happens on the walkthrough</h3>
+          <div class="rule-tan"></div>
+          <p>We look at the house together, talk through what is worth doing and what is not, and you leave with a rough range.</p>
+          <p>No listing agreement. No pressure. No charge.</p>
+          <p class="walkthrough__kicker">If the numbers do not work, we will tell you.</p>
         </div>
+
       </div>
     </div>
   </section>
@@ -372,48 +460,79 @@
      FOOTER
      ============================================================== -->
 <footer class="footer">
-  <div class="footer__inner">
-    <div>
-      <div class="footer__logo">
-        <span class="wordmark">
+  <div class="wrap">
+
+    <div class="footer__top">
+      <div>
+        <span class="wordmark wordmark--light wordmark--large">
           <span class="wordmark__re">Re</span>
           <span class="wordmark__rule"></span>
           <span class="wordmark__house">House</span>
         </span>
+        <p class="footer__blurb">
+          Design &middot; Renovation &middot; Listing<br>
+          Toronto &amp; the GTA
+        </p>
+        <nav class="footer__nav" aria-label="Footer">
+          <a href="#process">How it works</a>
+          <a href="#scope">Scope</a>
+          <a href="#book">Book</a>
+          <a href="privacy.html">Privacy</a>
+        </nav>
       </div>
-      <p class="footer__tagline">Designed to sell.<br>Built to transform.</p>
+
+      <div class="footer__contact">
+        Andrew Long &middot; Realtor&reg;<br>
+        M <a href="tel:+16473094770">647-309-4770</a> &nbsp;&middot;&nbsp; O <a href="tel:+14165358859">416-535-8859</a><br>
+        <a href="mailto:andrew@rehouseto.ca">andrew@rehouseto.ca</a><br>
+        <a href="https://rehouseto.ca">rehouseto.ca</a>
+
+        <!-- Social. Built as a list so a second channel is one <li> away.
+             The icon is inline SVG rather than a font or an image file: it
+             costs no extra request and it inherits the link colour, so the
+             hover works without a second rule. -->
+        <ul class="social">
+          <li>
+            <a class="social__link"
+               href="https://instagram.com/rehouseto"
+               target="_blank" rel="noopener"
+               aria-label="Re House on Instagram">
+              <svg class="social__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"></rect>
+                <circle cx="12" cy="12" r="4.1"></circle>
+                <circle class="social__dot" cx="17.3" cy="6.7" r="1.15"></circle>
+              </svg>
+              <span class="social__handle">@rehouseto</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <div>
-      <div class="footer__col-title">Studio</div>
-      <div class="footer__links">
-        <a href="#process"  class="footer__link">How it works</a>
-        <a href="#services" class="footer__link">Services</a>
-        <a href="#contact"  class="footer__link">Contact</a>
-        <a href="privacy.html" class="footer__link">Privacy</a>
-      </div>
-    </div>
+    <p class="footer__powered">Powered by Origin Collective Realty</p>
 
-    <div>
-      <div class="footer__col-title">Connect</div>
-      <div class="footer__links">
-        <a href="tel:+16473094770" class="footer__link">647-309-4770</a>
-        <a href="mailto:andrew@rehouseto.ca" class="footer__link">andrew@rehouseto.ca</a>
-        <a href="https://instagram.com/rehouse.toronto" class="footer__link" target="_blank" rel="noopener">@rehouse.toronto</a>
-        <span class="footer__link footer__link--plain">Toronto, Ontario</span>
-      </div>
-    </div>
+    <p class="footer__legal">
+      <strong>Re House is a pre-sale design and renovation service.</strong><br>
+      Real estate services provided by Andrew Long, Realtor&reg;, Origin Collective Realty Ltd., Brokerage.<br>
+      Re House does not arrange or provide financing. Any financing discussed is arranged independently through a licensed mortgage professional.<br>
+      &copy; <span data-year>2026</span> Re House. Not intended to solicit properties currently listed for sale.
+    </p>
 
-    <div class="footer__bottom">
-      <div class="footer__copy">© <span data-year>2026</span> Re House. Andrew Long, Realtor®.</div>
-      <div class="footer__copy">Powered by Origin Collective Realty</div>
-    </div>
   </div>
 </footer>
 
 
 <!-- ==============================================================
-     SCRIPTS — config first, then behaviour
+     STICKY MOBILE CTA — appears on phones once the hero scrolls away
+     ============================================================== -->
+<div class="sticky-cta" data-sticky-cta>
+  <span class="sticky-cta__note">Free &middot; No obligation<br>About 45 minutes</span>
+  <a class="btn" href="#book">Book a walkthrough</a>
+</div>
+
+
+<!-- ==============================================================
+     SCRIPTS
      ============================================================== -->
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>

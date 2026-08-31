@@ -1,20 +1,26 @@
 /* ==========================================================================
    RE HOUSE — Main Stylesheet
-   Built from mockup: ReHouse_Homepage_V1_3.html
+   Built from mockup: rehouse-mockup-brand_2.html (Design · Renovate · List)
    --------------------------------------------------------------------------
    TABLE OF CONTENTS
    01. Design tokens (colours, type, layout)
    02. Reset & base
-   03. Reusable utilities (sections, headings, buttons, wordmark)
-   04. Navigation
-   05. Hero
-   06. Concept / philosophy
-   07. Process
-   08. Services
-   09. Contact
-   10. Footer
-   11. Motion
-   12. Legal & utility pages
+   03. Wordmark
+   04. Type utilities
+   05. Section bands
+   06. Buttons & links
+   07. Navigation
+   08. Hero
+   09. Stages (Design / Renovate / List)
+   10. Scope sheet
+   11. Project — the finished house and the job's three numbers
+   12. Before/after tiles + The Note
+   13. FAQ
+   14. Booking
+   15. Footer
+   16. Sticky mobile CTA
+   17. Motion
+   18. Legal & utility pages
    --------------------------------------------------------------------------
    Screen-size rules live in css/responsive.css
    ========================================================================== */
@@ -44,8 +50,8 @@
   /* Layout */
   --nav-height: 64px;
   --max-width:  1200px;
-  --section-y:  7rem;
-  --section-x:  4rem;
+  --section-y:  5.25rem;
+  --section-x:  40px;
 }
 
 
@@ -62,30 +68,31 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--nav-height);
+}
+
+/* The nav is fixed, so anything jumped to needs to stop clear of it —
+   otherwise clicking "Process" hides the heading behind the bar. */
+[id] {
+  scroll-margin-top: calc(var(--nav-height) + 8px);
 }
 
 body {
   font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.8;
   background: var(--bone);
-  color: var(--black);
-  overflow-x: hidden;
+  color: var(--mid);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-img { max-width: 100%; display: block; }
-a   { color: inherit; }
-
-/* Visible focus ring for keyboard users */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible {
-  outline: 2px solid var(--tan);
-  outline-offset: 3px;
+img {
+  max-width: 100%;
+  display: block;
 }
 
-/* Skip link — hidden until focused */
+/* Keyboard users can jump straight past the nav */
 .skip-link {
   position: absolute;
   left: -9999px;
@@ -94,113 +101,239 @@ select:focus-visible {
   background: var(--black);
   color: var(--bone);
   padding: 12px 20px;
-  font-size: 12px;
-  letter-spacing: 0.1em;
+  font-size: 11px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
 }
-.skip-link:focus { left: 0; }
+.skip-link:focus {
+  left: 0;
+}
+
+/* The page is capped and centred by .wrap */
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--section-x);
+}
+.wrap--narrow {
+  max-width: 780px;
+}
 
 
 /* ==========================================================================
-   03. REUSABLE UTILITIES
+   03. WORDMARK
+   The Re | HOUSE lockup. Three variants:
+     (default)          dark text, for light backgrounds
+     .wordmark--light   light text, for dark backgrounds
+     .wordmark--large   bigger, for the hero and footer
    ========================================================================== */
-.section {
-  padding: var(--section-y) var(--section-x);
-  max-width: var(--max-width);
-  margin: 0 auto;
+.wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  line-height: 1;
+  text-decoration: none;
 }
 
-.accent-bar {
-  height: 3px;
-  background: var(--tan);
+.wordmark__re {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 28px;
+  letter-spacing: 0.02em;
+  color: var(--black);
 }
 
-.eyebrow {
-  font-size: 9px;
+.wordmark__rule {
+  width: 1px;
+  height: 18px;
+  background: var(--border);
+  align-self: center;
+  flex-shrink: 0;
+}
+
+.wordmark__house {
   font-weight: 200;
+  font-size: 9px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+}
+
+.wordmark--light .wordmark__re    { color: var(--bone); }
+.wordmark--light .wordmark__rule  { background: rgba(208, 200, 188, 0.4); }
+.wordmark--light .wordmark__house { color: var(--pebble); }
+
+.wordmark--large .wordmark__re    { font-size: 38px; font-weight: 200; }
+.wordmark--large .wordmark__rule  { height: 24px; }
+.wordmark--large .wordmark__house { font-size: 10px; }
+
+
+/* ==========================================================================
+   04. TYPE UTILITIES
+   ========================================================================== */
+
+/* Small tan label that sits above a heading */
+.eyebrow {
+  font-weight: 200;
+  font-size: 9px;
   letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--tan);
   margin-bottom: 1.5rem;
 }
 
-.h2 {
+h1,
+h2,
+h3 {
   font-family: var(--font-display);
-  font-size: clamp(26px, 3.2vw, 44px);
   font-weight: 300;
-  line-height: 1.2;
   color: var(--black);
 }
 
-/* Heading spacing helpers */
-.h2--gap-sm { margin-bottom: 1.5rem; }
-.h2--gap    { margin-bottom: 1.75rem; }
-.h2--gap-lg { margin-bottom: 3rem; }
-.h2--gap-xl { margin-bottom: 4.5rem; }
+h1 { font-size: clamp(38px, 4.5vw, 62px); line-height: 1.08; }
+h2 { font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; }
+h3 { font-size: 21px; line-height: 1.25; }
 
-/* Buttons */
-.btn-primary {
+/* Italic emphasis inside a heading picks up the softer charcoal */
+h1 em,
+h2 em {
+  font-style: italic;
+  color: var(--charcoal);
+}
+
+/* Intro paragraph under a heading */
+.lede {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--charcoal);
+  max-width: 46ch;
+}
+
+/* Short tan rule used as a divider under headings */
+.rule-tan {
+  width: 36px;
+  height: 1.5px;
+  background: var(--tan);
+  margin: 1.75rem 0;
+}
+
+p + p {
+  margin-top: 1.2em;
+}
+
+
+/* ==========================================================================
+   05. SECTION BANDS
+   Every full-width section is a .band. The modifier sets its background.
+   ========================================================================== */
+.band {
+  padding: var(--section-y) 0;
+  border-top: 3px solid var(--tan);
+}
+
+.band--bone   { background: var(--bone); }
+.band--pebble { background: var(--pebble); }
+.band--black  { background: var(--black); }
+
+/* On dark bands the type flips to light */
+.band--black h2,
+.band--black h3 { color: var(--bone); }
+.band--black .lede { color: var(--pebble); }
+
+
+/* ==========================================================================
+   06. BUTTONS & LINKS
+   ========================================================================== */
+.btn {
   display: inline-block;
-  font-size: 10px;
+  font-family: var(--font-body);
   font-weight: 300;
+  font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   background: var(--tan);
   color: var(--black);
-  padding: 14px 28px;
+  padding: 15px 30px;
+  border: 0;
+  border-radius: 0;
   text-decoration: none;
-  border: none;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  /* A hairline lift on hover — the button moves toward you rather than
+     just changing colour. 1px is deliberate; any more reads as a toy. */
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
-.btn-primary:hover,
-.btn-primary:focus {
-  background: var(--charcoal);
-  color: var(--bone);
+.btn:hover {
+  background: var(--tan-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(42, 36, 32, 0.22);
+}
+.btn:active { transform: translateY(0); box-shadow: none; }
+.btn:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: 3px;
 }
 
-.btn-ghost {
+.btn--dark {
+  background: var(--black);
+  color: var(--bone);
+}
+.btn--dark:hover { background: var(--charcoal); }
+
+/* Reassurance line under a button */
+.btn-note {
+  font-weight: 200;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--light-mid);
+  margin-top: 1.1rem;
+}
+
+/* Understated inline link.
+   The resting hairline stays put; a tan rule wipes across it from the left
+   on hover. Two borders would jump the layout, so the tan one is a pseudo
+   element sitting on top of the hairline. */
+.textlink {
+  position: relative;
+  display: inline-block;
   font-size: 10px;
   font-weight: 300;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--charcoal);
   text-decoration: none;
-  border-bottom: 0.5px solid rgba(90, 80, 72, 0.3);
-  padding-bottom: 2px;
-  transition: color 0.2s ease;
+  border-bottom: 0.5px solid rgba(90, 80, 72, 0.35);
+  padding-bottom: 3px;
+  transition: color 0.25s ease;
 }
-.btn-ghost:hover,
-.btn-ghost:focus { color: var(--tan); }
+.textlink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.5px;
+  height: 1px;
+  background: var(--tan);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.textlink:hover { color: var(--tan); }
+.textlink:hover::after,
+.textlink:focus-visible::after { transform: scaleX(1); }
 
-/* Wordmark lockup — "Re | HOUSE". Sized per context below. */
-.wordmark {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  text-decoration: none;
+/* On dark backgrounds the textlink needs to lift */
+.band--black .textlink {
+  color: var(--pebble);
+  border-bottom-color: rgba(208, 200, 188, 0.35);
 }
-.wordmark__re {
-  font-family: var(--font-display);
-  font-weight: 200;
-  line-height: 1;
-  letter-spacing: 0.02em;
-}
-.wordmark__rule {
-  width: 1px;
-  flex-shrink: 0;
-}
-.wordmark__house {
-  font-family: var(--font-body);
-  font-weight: 200;
-  letter-spacing: 0.42em;
-  text-transform: uppercase;
-}
+.band--black .textlink:hover { color: var(--tan); }
 
 
 /* ==========================================================================
-   04. NAVIGATION
+   07. NAVIGATION
+   Fixed to the top, translucent, blurs whatever scrolls under it.
    ========================================================================== */
 .nav {
   position: fixed;
@@ -213,14 +346,60 @@ select:focus-visible {
   align-items: center;
   justify-content: space-between;
   padding: 0 3.5rem;
-  background: rgba(248, 245, 240, 0.96);
-  backdrop-filter: blur(14px);
-  border-bottom: 0.5px solid var(--border);
+  background: transparent;
+  border-bottom: 0.5px solid transparent;
+  transition: background 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease;
 }
 
-.nav .wordmark__re    { font-size: 28px; color: var(--black); }
-.nav .wordmark__rule  { height: 18px; background: var(--border); }
-.nav .wordmark__house { font-size: 9px; color: var(--charcoal); }
+/* Over the hero photo the bar is transparent and the type is light.
+   Once the hero scrolls away, main.js adds .is-solid and it becomes bone. */
+.nav .wordmark__re    { color: var(--bone); }
+.nav .wordmark__rule  { background: rgba(208, 200, 188, 0.45); }
+.nav .wordmark__house { color: var(--pebble); }
+.nav .nav__link {
+  color: var(--pebble);
+  text-shadow: 0 1px 12px rgba(42, 36, 32, 0.9);
+}
+.nav .nav__cta {
+  background: var(--tan);
+  color: var(--black);
+}
+.nav .nav__cta:hover { background: var(--tan-light); }
+
+.nav.is-solid {
+  background: rgba(248, 245, 240, 0.96);
+  backdrop-filter: blur(14px);
+  border-bottom-color: var(--border);
+}
+.nav.is-solid .wordmark__re    { color: var(--black); }
+.nav.is-solid .wordmark__rule  { background: var(--border); }
+.nav.is-solid .wordmark__house { color: var(--charcoal); }
+.nav.is-solid .nav__link {
+  color: var(--charcoal);
+  text-shadow: none;
+}
+.nav.is-solid .nav__cta {
+  background: var(--black);
+  color: var(--bone);
+}
+.nav.is-solid .nav__cta:hover { background: var(--charcoal); }
+
+.nav__links {
+  display: flex;
+  gap: 2.25rem;
+  align-items: center;
+}
+
+.nav__link {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav__link:hover { color: var(--tan); }
 
 .nav__cta {
   font-size: 10px;
@@ -231,626 +410,945 @@ select:focus-visible {
   color: var(--bone);
   padding: 10px 22px;
   text-decoration: none;
-  transition: background 0.2s ease;
+  transition: background 0.2s;
 }
-.nav__cta:hover,
-.nav__cta:focus { background: var(--charcoal); }
+.nav__cta:hover { background: var(--charcoal); }
 
 
 /* ==========================================================================
-   05. HERO
+   08. HERO
+   Full-bleed media with the pitch over it. The still is also the video's
+   poster frame, so the layout is identical either way.
    ========================================================================== */
 .hero {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 36% 64%;
-  padding-top: var(--nav-height);
-}
-
-/* --- Left: dark brand panel --- */
-.hero__left {
-  background: var(--black);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 3.5rem 2.75rem 0;
-}
-
-/* Pushes the logo block down to the lower third on desktop */
-.hero__spacer { flex: 1; }
-
-.hero__left .wordmark        { margin-bottom: 10px; }
-.hero__left .wordmark__re    { font-size: 38px; color: var(--bone); }
-.hero__left .wordmark__rule  { height: 24px; background: rgba(208, 200, 188, 0.4); }
-.hero__left .wordmark__house { font-size: 10px; color: var(--pebble); }
-
-.hero__rule {
-  width: 32px;
-  height: 1px;
-  background: var(--tan);
-  margin: 16px 0;
-}
-
-.hero__left-body {
-  font-size: 11px;
-  font-weight: 300;
-  letter-spacing: 0.05em;
-  color: rgba(232, 224, 212, 0.58);
-  line-height: 1.7;
-}
-
-/* Tan bar pinned to the bottom of the dark panel */
-.hero__left-foot {
-  background: var(--tan);
-  margin: 3rem -2.75rem 0;
-  padding: 1rem 2.75rem;
-}
-.hero__left-foot-text {
-  font-size: 9px;
-  font-weight: 200;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--black);
-}
-
-/* --- Right: headline --- */
-.hero__right {
-  background: var(--bone);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 5rem 4.5rem 5rem 4rem;
   position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  border-top: 3px solid var(--tan);
+  background: var(--black);
   overflow: hidden;
 }
 
-/* Oversized "RH" watermark behind the headline */
-.hero__watermark {
+/* The still. main.js drops a <video> in here when one is configured. */
+.hero__media {
   position: absolute;
-  bottom: -0.08em;
-  right: -0.04em;
-  font-family: var(--font-display);
-  font-size: clamp(160px, 20vw, 280px);
-  font-weight: 300;
-  color: rgba(42, 36, 32, 0.04);
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
+  inset: 0;
+  background-color: var(--charcoal-dk);
+  background-size: cover;
+  background-position: center 58%;
+}
+.hero__media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.hero__eyebrow {
-  font-size: 9px;
+/* Shaded from the left so the type sits on darkness and the house stays
+   readable on the right. */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  /* Two layers: a bottom fade so the result line stays readable over
+     whatever the photo happens to be doing down there, then the main
+     left-to-right shading for the type. */
+  background:
+    linear-gradient(180deg,
+              rgba(42, 36, 32, 0) 62%,
+              rgba(42, 36, 32, 0.58) 100%),
+    linear-gradient(105deg,
+              rgba(42, 36, 32, 0.88) 0%,
+              rgba(42, 36, 32, 0.62) 36%,
+              rgba(42, 36, 32, 0.10) 66%,
+              rgba(42, 36, 32, 0.34) 100%);
+}
+
+.hero__inner {
+  position: relative;
+  width: 100%;
+  padding-bottom: 5.5rem;
+}
+.hero__inner .wrap { max-width: var(--max-width); }
+
+.hero h1 {
+  font-family: var(--font-display);
   font-weight: 200;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--tan);
-  margin-bottom: 1.75rem;
-  position: relative;
+  font-size: clamp(46px, 6.4vw, 90px);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: var(--bone);
+  text-wrap: balance;
+  max-width: 16ch;
 }
-
-.hero__title {
-  font-family: var(--font-display);
-  font-size: clamp(38px, 4.5vw, 62px);
-  font-weight: 300;
-  color: var(--black);
-  line-height: 1.1;
-  margin-bottom: 2rem;
-  position: relative;
-}
-.hero__title em {
+.hero h1 em {
   font-style: italic;
-  color: var(--charcoal);
+  color: var(--tan-light);
 }
 
-/* Line break that only applies on desktop, so the headline
-   wraps naturally on phones instead of breaking awkwardly. */
-.hero__title .break-desktop { display: none; }
-@media (min-width: 769px) {
-  .hero__title .break-desktop { display: inline; }
-}
-
-.hero__accent {
-  width: 36px;
-  height: 1.5px;
-  background: var(--tan);
-  margin-bottom: 1.75rem;
-  position: relative;
-}
+.hero .eyebrow { color: var(--tan); }
 
 .hero__sub {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 300;
-  color: var(--mid);
   line-height: 1.8;
-  max-width: 400px;
-  margin-bottom: 2.75rem;
-  position: relative;
+  color: var(--pebble);
+  max-width: 54ch;
+  text-wrap: pretty;
+  margin-bottom: 2.25rem;
 }
 
-.hero__buttons {
-  display: flex;
-  gap: 1.25rem;
-  align-items: center;
-  flex-wrap: wrap;
-  position: relative;
-}
+.hero .btn-note { color: var(--light-mid); }
+
 
 
 /* ==========================================================================
-   06. CONCEPT / PHILOSOPHY
+   09. STAGES — Design / Renovate / List
    ========================================================================== */
-.concept {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: start;
-}
-
-.concept__body {
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--mid);
-  line-height: 1.8;
-  margin-bottom: 1.5rem;
-}
-.concept__body:last-of-type { margin-bottom: 0; }
-
-.concept__aside { padding-top: 3.5rem; }
-
-.concept__pullquote {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 300;
-  font-style: italic;
-  color: var(--charcoal);
-  line-height: 1.5;
-  padding-left: 1.5rem;
-  border-left: 3px solid var(--tan);
-}
-
-
-/* ==========================================================================
-   07. PROCESS
-   ========================================================================== */
-.process {
-  background: var(--pebble);
-}
-
-.process__wrap {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: var(--section-y) var(--section-x);
-}
-
-.steps {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  position: relative;
-}
-
-/* Horizontal connecting line behind the dots */
-.steps__spine {
-  position: absolute;
-  top: 5px;
-  left: 10%;
-  right: 10%;
-  height: 0.5px;
-  background: var(--border);
-}
-
-.step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 0 0.75rem;
-  position: relative;
-}
-.step__dot {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: var(--tan);
-  margin-bottom: 1.5rem;
-  position: relative;
-  z-index: 1;
-  flex-shrink: 0;
-}
-.step__number {
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-style: italic;
-  color: var(--tan);
-  margin-bottom: 0.6rem;
-}
-.step__title {
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--black);
-  margin-bottom: 0.4rem;
-}
-.step__meta {
-  font-size: 9px;
-  font-weight: 200;
-  letter-spacing: 0.15em;
-  color: var(--charcoal);
-  margin-bottom: 0.65rem;
-}
-.step__body {
-  font-size: 11px;
-  font-weight: 300;
-  color: var(--mid);
-  line-height: 1.7;
-}
-
-
-/* ==========================================================================
-   08. SERVICES
-   ========================================================================== */
-.tiers {
+.stages {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border);
+  margin-top: 3.5rem;
+  border-top: 0.5px solid var(--border);
 }
 
-.tier {
-  background: var(--bone);
-  padding: 2.5rem 2rem;
+.stage {
+  padding: 2.25rem 2.25rem 2.5rem;
+  border-right: 0.5px solid var(--border);
   position: relative;
 }
-.tier--featured { background: var(--black); }
+.stage:last-child { border-right: 0; }
 
-.tier__bar {
+/* Short tan tick above each stage */
+.stage::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  width: 36px;
   height: 3px;
-  background: var(--charcoal);
+  background: var(--tan);
 }
-.tier--featured .tier__bar { background: var(--tan); }
-.tier--bespoke  .tier__bar { background: var(--tan); opacity: 0.5; }
 
-.tier__badge {
-  font-size: 8px;
+.stage__number {
   font-weight: 200;
-  letter-spacing: 0.28em;
+  font-size: 9px;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
+  color: var(--tan);
+  margin-bottom: 0.9rem;
+}
+
+.stage__name {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 28px;
+  color: var(--black);
+  margin-bottom: 0.75rem;
+  line-height: 1.1;
+}
+
+.stage p {
+  font-size: 13px;
+  line-height: 1.8;
   color: var(--charcoal);
-  margin-bottom: 1rem;
-}
-.tier--featured .tier__badge,
-.tier--bespoke  .tier__badge { color: var(--tan); }
-
-.tier__name {
-  font-family: var(--font-display);
-  font-size: 24px;
-  font-weight: 300;
-  color: var(--black);
-  margin-bottom: 0.5rem;
-}
-.tier--featured .tier__name { color: var(--bone); }
-
-.tier__price {
-  font-size: 12px;
-  font-weight: 300;
-  color: var(--tan);
-  margin-bottom: 1.5rem;
 }
 
-.tier__rule {
-  width: 32px;
-  height: 0.5px;
-  background: var(--border);
-  margin-bottom: 1.5rem;
-}
-.tier--featured .tier__rule { background: rgba(232, 224, 212, 0.18); }
-
-.tier__list {
-  list-style: none;
-  color: var(--mid);
-}
-.tier--featured .tier__list { color: var(--pebble); }
-
-.tier__list li {
-  font-size: 12px;
-  font-weight: 300;
-  padding: 5px 0 5px 1.2rem;
-  position: relative;
-  line-height: 1.5;
-}
-.tier__list li::before {
-  content: '—';
-  position: absolute;
-  left: 0;
-}
+.stages__foot { margin-top: 2.5rem; }
 
 
 /* ==========================================================================
-   09. CONTACT
+   10. SCOPE SHEET
+   Two-column "usually worth doing / usually not" table.
    ========================================================================== */
-.contact {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  /* Both columns run the full height of the taller one, so neither side
-     ends in a patch of dead space. See "Positioning line" below. */
-  align-items: stretch;
+.sheet {
+  margin-top: 3.25rem;
+  background: var(--bone);
+  border: 0.5px solid var(--border);
 }
 
-.contact__body {
-  font-size: 14px;
-  font-weight: 300;
-  color: var(--mid);
-  line-height: 1.8;
-  margin-bottom: 2rem;
-}
-
-.contact__checks {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.contact__check {
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-}
-.contact__dash {
-  width: 16px;
-  height: 1.5px;
+.sheet__bar {
+  height: 3px;
   background: var(--tan);
-  margin-top: 9px;
-  flex-shrink: 0;
-}
-.contact__check-text {
-  font-size: 13px;
-  font-weight: 300;
-  color: var(--mid);
-  line-height: 1.6;
 }
 
-/* --- Positioning line -----------------------------------------------------
-   The left column is stretched to the full height of the form panel beside
-   it, and the quote is given automatic margins top and bottom. That makes it
-   centre itself in whatever space is left over under the checklist. If the
-   two columns ever end up the same height, the auto margins collapse to
-   nothing and the quote simply sits below the checklist as normal.
-   -------------------------------------------------------------------------- */
-.contact > .reveal {
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-}
-.contact__quote {
-  margin-block: auto;
-  padding-top: 2.5rem;
-  max-width: 26ch;
-}
-.contact__quote p {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 2rem;
-  line-height: 1.32;
-  color: var(--black);
-  margin-bottom: 1.4rem;
-}
-.contact__quote footer {
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--mid);
-}
-.contact__quote-rule {
-  display: block;
-  width: 44px;
-  height: 1px;
-  background: var(--tan);
-  margin-bottom: 0.9rem;
-}
-
-/* --- Dark contact panel --- */
-.panel {
-  background: var(--black);
-  padding: 2.75rem;
-  /* Column layout, contents optically centred, so the panel still reads
-     as deliberate when it is stretched taller than its own content. */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.panel__eyebrow {
-  font-size: 9px;
-  font-weight: 200;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--tan);
-  margin-bottom: 1rem;
-}
-.panel__title {
-  font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 300;
-  color: var(--bone);
-  line-height: 1.25;
-  margin-bottom: 1rem;
-}
-.panel__body {
-  font-size: 13px;
-  font-weight: 300;
-  color: rgba(232, 224, 212, 0.72);
-  line-height: 1.8;
-  margin-bottom: 2rem;
-}
-
-.panel__button {
-  display: block;
-  width: 100%;
-  background: var(--tan);
-  padding: 16px;
-  font-size: 11px;
-  font-weight: 300;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--black);
-  text-align: center;
-  text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-.panel__button:hover,
-.panel__button:focus {
-  background: var(--charcoal);
-  color: var(--bone);
-}
-
-.panel__note {
-  font-size: 10px;
-  font-weight: 300;
-  color: rgba(196, 168, 130, 0.82);
-  margin-top: 0.85rem;
-  text-align: center;
-  line-height: 1.6;
-}
-
-.panel__alt {
-  margin-top: 2rem;
-  padding-top: 1.75rem;
-  border-top: 0.5px solid rgba(196, 168, 130, 0.16);
-}
-.panel__alt-label {
-  font-size: 9px;
-  font-weight: 200;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--tan);
-  margin-bottom: 0.9rem;
-}
-.panel__alt-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-}
-.panel__link {
-  font-size: 13px;
-  font-weight: 300;
-  color: rgba(232, 224, 212, 0.72);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-.panel__link:hover,
-.panel__link:focus { color: var(--tan); }
-.panel__link span {
-  color: rgba(232, 224, 212, 0.58);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-}
-
-/* The enquiry form opens in a Tally modal (see js/main.js), so there is
-   no embedded iframe to style here. The button above is the trigger. */
-
-
-/* ==========================================================================
-   10. FOOTER
-   ========================================================================== */
-.footer {
-  background: var(--black);
-  padding: 3.5rem var(--section-x);
-}
-
-.footer__inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 3rem;
-}
-
-.footer__logo { margin-bottom: 0.75rem; }
-.footer__logo .wordmark__re    { font-size: 26px; color: var(--bone); }
-.footer__logo .wordmark__rule  { height: 16px; background: rgba(208, 200, 188, 0.25); }
-.footer__logo .wordmark__house { font-size: 8px; color: var(--pebble); }
-
-.footer__tagline {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 300;
-  font-style: italic;
-  color: rgba(232, 224, 212, 0.4);
-  line-height: 1.5;
-}
-
-.footer__col-title {
-  font-size: 9px;
-  font-weight: 200;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--tan);
-  margin-bottom: 1rem;
-}
-
-.footer__links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-.footer__link {
-  font-size: 12px;
-  font-weight: 300;
-  color: rgba(232, 224, 212, 0.48);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-.footer__link:hover,
-.footer__link:focus { color: var(--tan); }
-.footer__link--plain { cursor: default; }
-
-.footer__bottom {
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 0.5px solid rgba(232, 224, 212, 0.07);
-  grid-column: 1 / -1;
+.sheet__head {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  align-items: baseline;
+  gap: 20px;
   flex-wrap: wrap;
+  padding: 1.15rem 1.75rem;
+  border-bottom: 0.5px solid var(--border);
+  font-weight: 200;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
 }
-.footer__copy {
+.sheet__head-left  { color: var(--black); }
+.sheet__head-right { color: var(--charcoal); }
+
+.sheet__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.sheet__col {
+  padding: 1.75rem 1.75rem 2rem;
+}
+.sheet__col + .sheet__col {
+  border-left: 0.5px solid var(--border);
+}
+
+.sheet__label {
+  font-weight: 200;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 1.15rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 0.5px solid var(--border);
+}
+.sheet__col--keep .sheet__label { color: var(--black); }
+.sheet__col--skip .sheet__label { color: var(--light-mid); }
+
+.sheet__col ul { list-style: none; }
+
+.sheet__col li {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--charcoal);
+  padding: 0.55rem 0 0.55rem 1.75rem;
+  position: relative;
+}
+
+/* Filled tan square = worth doing. Empty outline = usually not. */
+.sheet__col li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.05rem;
+  width: 9px;
+  height: 9px;
+}
+.sheet__col--keep li::before { background: var(--tan); }
+.sheet__col--skip li::before { border: 0.5px solid var(--border); }
+
+.sheet__foot {
+  padding: 1.1rem 1.75rem;
+  border-top: 0.5px solid var(--border);
+  font-size: 11.5px;
+  line-height: 1.75;
+  color: var(--charcoal);
+}
+
+.scope__close {
+  margin-top: 2.75rem;
+  max-width: 56ch;
+  font-size: 15px;
+  line-height: 1.85;
+}
+.scope__cta { margin-top: 2.25rem; }
+
+
+/* --------------------------------------------------------------------------
+   THE PROJECT — the finished house, with the job's three numbers over it
+   -------------------------------------------------------------------------- */
+#project {
+  border-top: 3px solid var(--tan);
+  border-bottom: 3px solid var(--tan);
+  background: var(--black);
+}
+
+.project-lead {
+  position: relative;
+  min-height: 62vh;
+  display: flex;
+  align-items: flex-end;
+  background-color: var(--charcoal-dk);
+  background-size: cover;
+  background-position: center 62%;
+}
+
+.project-lead__overlay {
+  position: relative;
+  width: 100%;
+  padding: 7rem 0 3rem;
+  background: linear-gradient(180deg,
+              rgba(42, 36, 32, 0) 0%,
+              rgba(42, 36, 32, 0.42) 20%,
+              rgba(42, 36, 32, 0.78) 44%,
+              rgba(42, 36, 32, 0.94) 74%,
+              rgba(42, 36, 32, 0.98) 100%);
+}
+
+.project-lead__addr {
+  font-weight: 200;
   font-size: 10px;
-  font-weight: 300;
-  color: rgba(232, 224, 212, 0.25);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--tan);
+  margin-bottom: 1.25rem;
+  text-shadow: 0 1px 14px rgba(42, 36, 32, 0.95);
 }
-.footer__copy a { color: inherit; text-decoration: none; }
-.footer__copy a:hover { color: var(--tan); }
+
+.project-lead__head {
+  font-family: var(--font-display);
+  font-weight: 200;
+  font-size: clamp(32px, 4.4vw, 58px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--bone);
+  text-wrap: balance;
+  text-shadow: 0 2px 30px rgba(42, 36, 32, 0.6);
+}
+.project-lead__head em {
+  font-style: italic;
+  color: var(--tan-light);
+}
+
+/* ---- The three numbers ---- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2rem 1.75rem;
+  margin: 2.5rem 0 0;
+  padding-top: 1.75rem;
+  border-top: 3px solid var(--tan);
+  max-width: 1000px;
+}
+
+.stat { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.stat__label {
+  font-weight: 200;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--light-mid);
+  text-shadow: 0 1px 14px rgba(42, 36, 32, 0.95);
+}
+
+.stat__value {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1;
+  color: var(--bone);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 2px 24px rgba(42, 36, 32, 0.7);
+}
+
+/* The return is the one that matters — it gets the accent */
+.stat--lead .stat__value { color: var(--tan); }
+
+.stat__mark {
+  font-size: 0.5em;
+  vertical-align: super;
+  color: var(--light-mid);
+}
+
+/* The footnote is not fine print: without it the estimate is unsupportable,
+   so it stays legible rather than shrinking away. */
+.project-lead__note {
+  margin-top: 1.25rem;
+  max-width: 62ch;
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--pebble);
+  text-shadow: 0 1px 14px rgba(42, 36, 32, 0.95);
+}
+
+.project-lead__cta { margin-top: 2rem; }
+
+
+/* --------------------------------------------------------------------------
+   BEFORE / AFTER TILES — under the project photo
+   --------------------------------------------------------------------------
+   Each tile stacks two photos of the same corner of the house. The finished
+   shot sits on top; move the pointer over it (or tap it, on a phone) and it
+   fades away to show what was there before.
+
+   TO ADD A PAIR: copy one .reveal-tile block in index.html and point the two
+   background images at your own before/after shots. Nothing else to change —
+   the grid and the tap handling pick it up automatically.
+   -------------------------------------------------------------------------- */
+.pairs {
+  padding: 3.25rem var(--section-x) 4.5rem;
+}
+
+.pairs__label {
+  font-weight: 200;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--light-mid);
+  margin-bottom: 1.25rem;
+}
+
+.reveal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.reveal-tile {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--charcoal-dk);
+  border: 0.5px solid rgba(196, 168, 130, 0.3);
+  cursor: pointer;
+}
+
+.reveal-tile__img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+/* The finished shot, sitting on top of the before */
+/* Asymmetric on purpose: the before is uncovered quickly so the tile feels
+   answerable to the pointer, and the finished shot returns more slowly so
+   leaving it never feels abrupt. */
+.reveal-tile__img--after {
+  opacity: 1;
+  transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* A little shade at the bottom so the label stays readable on any photo */
+.reveal-tile::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 38%;
+  z-index: 2;
+  background: linear-gradient(0deg, rgba(42, 36, 32, 0.88) 0%, rgba(42, 36, 32, 0.35) 55%, transparent 100%);
+  pointer-events: none;
+}
+
+/* The label swaps with the photo underneath it */
+.reveal-tile::after {
+  content: "After";
+  position: absolute;
+  left: 13px;
+  bottom: 11px;
+  z-index: 3;
+  font-weight: 200;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--tan-light);
+  pointer-events: none;
+}
+
+/* Pointer devices: hovering peels the finished shot away.
+   :focus-visible (not :focus) so a tap does not fight the tap handler. */
+@media (hover: hover) {
+  .reveal-tile:hover .reveal-tile__img--after,
+  .reveal-tile:focus-visible .reveal-tile__img--after {
+    opacity: 0;
+    transition-duration: 450ms;
+  }
+  .reveal-tile:hover::after,
+  .reveal-tile:focus-visible::after { content: "Before"; color: var(--pebble); }
+}
+
+/* Touch devices: main.js toggles this class on tap */
+.reveal-tile.is-peeking .reveal-tile__img--after { opacity: 0; transition-duration: 450ms; }
+.reveal-tile.is-peeking::after { content: "Before"; color: var(--pebble); }
+
+
+/* ---- Touch screens get the transformation, not a hover ----
+   There is no hover on a phone, and a tap target nobody knows to tap is
+   just a photograph. So on touch the tile ARRIVES showing the before, and
+   the finished shot fades in as the tile reaches the middle of the screen.
+   The renovation happens while you scroll past it.
+
+   That also teaches the control for free: having watched it change once,
+   tapping to send it back is an obvious thing to try. main.js adds
+   .is-revealed once, the first time each tile is properly on screen.
+
+   The peek rule is repeated in here because .is-revealed would otherwise
+   win on source order and the tap would stop working. */
+@media (hover: none) {
+  .reveal-tile__img--after {
+    opacity: 0;
+    transition-duration: 900ms;          /* slower — this one is the show */
+  }
+  .reveal-tile.is-revealed .reveal-tile__img--after { opacity: 1; }
+
+  /* All three tiles fit on a phone screen at once, so a quick scroll would
+     transform them in unison — which reads as a glitch rather than a
+     sequence. A beat between each and they cascade instead. */
+  .reveal-tile:nth-child(2).is-revealed .reveal-tile__img--after { transition-delay: 150ms; }
+  .reveal-tile:nth-child(3).is-revealed .reveal-tile__img--after { transition-delay: 300ms; }
+
+  /* Tapping must answer immediately, so the stagger is cleared here.
+     This rule sits last on purpose — it ties the two above on specificity
+     and wins on source order. */
+  .reveal-tile.is-revealed.is-peeking .reveal-tile__img--after,
+  .reveal-tile:nth-child(2).is-revealed.is-peeking .reveal-tile__img--after,
+  .reveal-tile:nth-child(3).is-revealed.is-peeking .reveal-tile__img--after {
+    opacity: 0;
+    transition-duration: 450ms;
+    transition-delay: 0ms;
+  }
+  .reveal-tile:not(.is-revealed)::after { content: "Before"; color: var(--pebble); }
+}
+
+.reveal-tile__cap {
+  position: absolute;
+  right: 13px;
+  bottom: 11px;
+  z-index: 3;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--light-mid);
+  pointer-events: none;
+}
+
+.pairs__hint {
+  margin-top: 1rem;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--mid);
+}
+/* One line for pointers, another for thumbs */
+.pairs__hint--touch { display: none; }
+@media (hover: none) {
+  .pairs__hint--pointer { display: none; }
+  .pairs__hint--touch { display: inline; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-tile__img--after { transition: none; }
+}
+
+
+/* --------------------------------------------------------------------------
+   THE NOTE — Andrew's own account of the job, in his own words
+   -------------------------------------------------------------------------- */
+.note {
+  margin-top: 3rem;
+}
+
+.note__body p {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(19px, 1.9vw, 23px);
+  line-height: 1.62;
+  color: var(--black);
+  max-width: 60ch;
+}
+.note__body p + p { margin-top: 1.4rem; }
+.note__body em { font-style: italic; color: var(--charcoal); }
+
+.note__kicker {
+  margin-top: 2.5rem;
+  padding-top: 1.75rem;
+  border-top: 0.5px solid var(--border);
+}
+.note__kicker p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--charcoal);
+  max-width: 52ch;
+}
+.note__sig {
+  margin-top: 1.5rem;
+  font-weight: 200;
+  font-size: 9px !important;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--light-mid) !important;
+}
+
 
 
 /* ==========================================================================
-   11. MOTION
+   13. FAQ
+   Native <details> accordions — no JavaScript needed.
    ========================================================================== */
-@keyframes fade-up {
+.faq {
+  margin-top: 3rem;
+  border-top: 0.5px solid var(--border);
+}
+
+.faq details {
+  border-bottom: 0.5px solid var(--border);
+}
+
+.faq summary {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 21px;
+  color: var(--black);
+  padding: 1.5rem 3rem 1.5rem 0;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  line-height: 1.35;
+}
+.faq summary::-webkit-details-marker { display: none; }
+
+/* The + / – toggle on the right */
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 4px;
+  top: 1.45rem;
+  font-family: var(--font-body);
+  font-weight: 200;
+  font-size: 18px;
+  color: var(--tan);
+}
+.faq details[open] summary::after { content: "\2013"; }
+
+.faq summary:focus-visible {
+  outline: 1px solid var(--tan);
+  outline-offset: 3px;
+}
+
+.faq__answer {
+  padding: 0 4rem 1.75rem 0;
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: var(--charcoal);
+}
+
+.faq__cta { margin-top: 3rem; }
+
+
+/* ==========================================================================
+   14. BOOKING
+   Left: the enquiry panel. Right: what happens on the walkthrough.
+   ========================================================================== */
+.booking__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4.5rem;
+  margin-top: 3rem;
+  align-items: start;
+}
+
+/* ---- Enquiry form ---- */
+.enquiry {
+  border: 0.5px solid rgba(208, 200, 188, 0.3);
+  padding: 2.5rem 2.25rem;
+}
+
+.field { margin-bottom: 1.25rem; }
+
+.field label {
+  display: block;
+  font-weight: 200;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--light-mid);
+  margin-bottom: 0.6rem;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-height: 44px;
+  background: transparent;
+  border: 0.5px solid rgba(208, 200, 188, 0.3);
+  border-radius: 0;
+  color: var(--bone);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 13px;
+  padding: 12px 14px;
+}
+.field input:focus,
+.field select:focus {
+  outline: 1px solid var(--tan);
+  outline-offset: 0;
+}
+.field select option { background: var(--black); }
+
+/* Marked only after a failed submit, never while someone is still typing */
+.field.is-invalid input,
+.field.is-invalid select {
+  border-color: var(--tan);
+}
+
+.field__error {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--tan);
+  margin: -0.25rem 0 1.25rem;
+}
+
+.enquiry .btn { margin-top: 0.5rem; }
+
+/* Secondary "or pick a time / or just call" lines */
+.enquiry__alt {
+  margin-top: 1.5rem;
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--light-mid);
+}
+.enquiry__alt a {
+  color: var(--pebble);
+  text-decoration: none;
+  border-bottom: 0.5px solid rgba(208, 200, 188, 0.35);
+}
+.enquiry__alt a:hover { color: var(--tan); }
+
+/* ---- Walkthrough panel ---- */
+.walkthrough {
+  border-left: 3px solid var(--tan);
+  padding-left: 2rem;
+}
+
+.walkthrough p {
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--light-mid);
+}
+
+.walkthrough__kicker {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 21px;
+  line-height: 1.5;
+  color: var(--bone);
+  margin-top: 1.5rem;
+}
+
+
+/* ==========================================================================
+   15. FOOTER
+   ========================================================================== */
+.footer {
+  background: var(--charcoal-dk);
+  border-top: 3px solid var(--tan);
+  padding: 4rem 0 7rem;
+}
+
+.footer__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  padding-bottom: 2.5rem;
+  border-bottom: 0.5px solid rgba(208, 200, 188, 0.16);
+}
+
+.footer__blurb {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: rgba(232, 224, 212, 0.58);
+  line-height: 1.7;
+  margin-top: 1.25rem;
+}
+
+.footer__contact {
+  font-size: 12px;
+  line-height: 2;
+  color: var(--light-mid);
+  text-align: right;
+}
+.footer__contact a {
+  color: var(--light-mid);
+  text-decoration: none;
+}
+.footer__contact a:hover { color: var(--tan); }
+
+/* ---- Social ----
+   A flex row so more channels just slot in. The icon is stroked in
+   currentColor, so it takes the link's hover for free. */
+.social {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  margin-top: 0.85rem;
+}
+
+.social__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--light-mid);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+.social__link:hover { color: var(--tan); }
+
+.social__icon {
+  width: 16px;
+  height: 16px;
+  flex: none;                 /* never let flex squash the glyph */
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+}
+/* The little lens dot is solid, not an outline */
+.social__icon .social__dot { fill: currentColor; stroke: none; }
+
+.social__handle {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.footer__nav {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.footer__nav a {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--light-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer__nav a:hover { color: var(--tan); }
+
+.footer__powered {
+  font-weight: 200;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--pebble);
+  margin-top: 2.5rem;
+}
+
+.footer__legal {
+  font-size: 11px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--light-mid);
+  max-width: 78ch;
+  margin-top: 1.25rem;
+}
+.footer__legal strong {
+  color: var(--light-mid);
+  font-weight: 400;
+}
+
+
+/* ==========================================================================
+   16. STICKY MOBILE CTA
+   Slides up once the hero has scrolled out of view. Phones only —
+   responsive.css switches it on.
+   ========================================================================== */
+.sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 120;
+  background: var(--black);
+  border-top: 3px solid var(--tan);
+  padding: 12px 20px;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  transform: translateY(120%);
+  transition: transform 0.25s ease;
+}
+.sticky-cta.is-visible { transform: translateY(0); }
+
+.sticky-cta__note {
+  font-weight: 200;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--light-mid);
+  line-height: 1.6;
+}
+
+
+/* ==========================================================================
+   17. MOTION
+   Hero copy fades up on load. Anything with class="reveal" fades in as it
+   scrolls into view (wired up in js/main.js). The hero photo drifts, the
+   tan rules draw themselves, and the project figures count up (main.js).
+   Everything here is switched off for prefers-reduced-motion at the
+   bottom of this section.
+   ========================================================================== */
+@keyframes fadeUp {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.hero__right > *:not(.hero__watermark) {
-  animation: fade-up 0.75s ease forwards;
-  opacity: 0;
+/* ---- The hero photograph drifts ----
+   A very slow push in, so the hero reads as a place rather than a picture.
+   It should be impossible to catch it moving: 6% over 26 seconds, once,
+   no reverse. .hero has overflow:hidden, so nothing spills. */
+@keyframes heroDrift {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
 }
-.hero__eyebrow { animation-delay: 0.20s; }
-.hero__title   { animation-delay: 0.35s; }
-.hero__accent  { animation-delay: 0.48s; }
-.hero__sub     { animation-delay: 0.58s; }
-.hero__buttons { animation-delay: 0.72s; }
+.hero__media {
+  animation: heroDrift 26s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  will-change: transform;
+}
 
-/* Scroll-triggered reveal — add class="reveal" to opt an element in.
-   js/main.js adds .is-visible when it scrolls into view. */
+/* ---- The tan rules draw themselves ----
+   Each rule wipes in from the left as its section arrives. It echoes the
+   rule in the wordmark, which is why it feels like the brand and not like
+   an effect. Inside a .reveal it waits for the section; the hero's own
+   rule runs on load. */
+.reveal .rule-tan {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s;
+}
+.reveal.is-visible .rule-tan { transform: scaleX(1); }
+
+@keyframes ruleDraw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.hero .rule-tan {
+  transform-origin: left center;
+  animation: ruleDraw 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.48s backwards;
+}
+
+/* ---- The hero copy arrives a line at a time ----
+   Each element rises and fades on its own beat, so the pitch reads as a
+   sentence arriving rather than a block appearing. The headline's two lines
+   are their own spans so they can land one after the other.
+
+   The rule is deliberately left out of this set — it has its own draw
+   animation below, and two animations cannot share one transform.
+   'backwards' holds each element invisible until its turn comes. */
+.hero__inner .wrap > .anim:not(.rule-tan),
+.hero h1 .hero__line {
+  animation: fadeUp 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+}
+
+.hero h1 .hero__line { display: block; }
+
+.hero__inner .wrap > .anim:nth-child(1) { animation-delay: 0.15s; }  /* eyebrow */
+.hero h1 .hero__line:nth-child(1)       { animation-delay: 0.26s; }  /* line one */
+.hero h1 .hero__line:nth-child(2)       { animation-delay: 0.36s; }  /* line two */
+/* child 3 is the rule — it draws itself, see below */
+.hero__inner .wrap > .anim:nth-child(4) { animation-delay: 0.58s; }  /* the paragraph */
+.hero__inner .wrap > .anim:nth-child(5) { animation-delay: 0.70s; }  /* the button */
+
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(18px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 .reveal.is-visible {
@@ -858,16 +1356,22 @@ select:focus-visible {
   transform: translateY(0);
 }
 
+/* Anyone who has asked their system to reduce motion gets none of it */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero__right > *:not(.hero__watermark) { animation: none; opacity: 1; }
-  .reveal { opacity: 1; transform: none; }
-  * { transition-duration: 0.01ms !important; }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 
 /* ==========================================================================
-   12. LEGAL & UTILITY PAGES (privacy, 404)
+   18. LEGAL & UTILITY PAGES (privacy.html, 404.html)
    ========================================================================== */
 .page {
   max-width: 760px;
@@ -909,6 +1413,11 @@ select:focus-visible {
 .page p  { margin-bottom: 1rem; }
 .page ul { margin: 0 0 1rem 1.25rem; }
 .page a  { color: var(--tan); }
+
+/* ...but a button inside the page keeps its own colours, or it ends up
+   tan text on a tan background. */
+.page a.btn        { color: var(--black); }
+.page a.btn--dark  { color: var(--bone); }
 
 /* Centred message page (404) */
 .notice {

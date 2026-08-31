@@ -16,3 +16,8 @@ npm-debug.log*
 # Local environment / secrets — never commit these
 .env
 .env.local
+
+# Transfer archive from the Claude build — safe to delete
+_rehouse-build.zip
+_*.zip
+_to_delete/

@@ -3,27 +3,26 @@
    --------------------------------------------------------------------------
    All screen-size rules live here so the main stylesheet stays readable.
    Breakpoints:
-     1100px — small laptop
+     1024px — small laptop
       900px — tablet
-      768px — large phone
+      768px — large phone  (the layout properly stacks here)
       480px — phone
    ========================================================================== */
 
 
 /* ==========================================================================
-   SMALL LAPTOP — up to 1100px
+   SMALL LAPTOP — up to 1024px
    ========================================================================== */
-@media (max-width: 1100px) {
+@media (max-width: 1024px) {
   :root {
-    --section-y: 5.5rem;
-    --section-x: 2.5rem;
+    --section-y: 4.5rem;
+    --section-x: 32px;
   }
 
-  .nav { padding: 0 2.5rem; }
+  .nav { padding: 0 2rem; }
+  .nav__links { gap: 1.5rem; }
 
-  .hero__right { padding: 4rem 3rem; }
-
-  .concept { gap: 3rem; }
+  .booking__grid { gap: 3rem; }
 }
 
 
@@ -31,90 +30,87 @@
    TABLET — up to 900px
    ========================================================================== */
 @media (max-width: 900px) {
-  /* Two-column sections stack */
-  .concept,
-  .contact {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  .concept__aside { padding-top: 0; }
+  .stage { padding: 2rem 1.5rem 2.25rem; }
 
-  /* Stacked, so there is no leftover space to centre the quote in — it
-     just sits under the checklist with a fixed gap. */
-  .contact__quote { margin-block: 0; padding-top: 2rem; max-width: 30ch; }
-  .contact__quote p { font-size: 1.75rem; }
-
-  /* Service tiers stack so pricing stays readable */
-  .tiers { grid-template-columns: 1fr; }
-
-  /* --- Process becomes a vertical timeline ---------------------------
-     The dot column runs down the left with the connecting line behind it,
-     and each step's text sits in the second column.
-     ------------------------------------------------------------------ */
-  .steps { grid-template-columns: 1fr; }
-
-  .steps__spine {
-    top: 8px;
-    bottom: 2.5rem;
-    left: 5px;
-    right: auto;
-    width: 1px;
-    height: auto;
-  }
-
-  .step {
-    display: grid;
-    grid-template-columns: 11px 1fr;
-    column-gap: 1.5rem;
-    text-align: left;
-    padding: 0 0 2.5rem;
-  }
-  .step:last-child { padding-bottom: 0; }
-
-  .step__dot    { grid-column: 1; grid-row: 1; margin: 5px 0 0; }
-  .step__number { grid-column: 2; grid-row: 1; font-size: 11px; margin-bottom: 0.3rem; }
-  .step__title  { grid-column: 2; grid-row: 2; font-size: 15px; margin-bottom: 0.3rem; }
-  .step__meta   { grid-column: 2; grid-row: 3; margin-bottom: 0.5rem; }
-  .step__body   { grid-column: 2; grid-row: 4; font-size: 12.5px; line-height: 1.75; }
-
-  .footer__inner { grid-template-columns: 1fr 1fr; }
+  .faq__answer { padding-right: 2rem; }
 }
 
 
 /* ==========================================================================
    LARGE PHONE — up to 768px
+   This is where every multi-column layout collapses to a single column.
    ========================================================================== */
 @media (max-width: 768px) {
-  :root { --nav-height: 58px; }
-
-  .nav { padding: 0 1.5rem; height: 58px; }
-  .nav .wordmark__re { font-size: 24px; }
-
-  .section         { padding: 4.5rem 1.5rem; }
-  .process__wrap   { padding: 4.5rem 1.5rem; }
-
-  /* Hero stacks: dark panel on top, headline below */
-  .hero {
-    grid-template-columns: 1fr;
-    min-height: auto;
-    padding-top: 58px;
+  :root {
+    --section-y: 60px;
+    --section-x: 24px;
+    --nav-height: 58px;
   }
-  .hero__left   { padding: 2rem 1.5rem 0; }
-  .hero__spacer { display: none; }
-  .hero__left-foot {
-    margin: 1.75rem -1.5rem 0;
-    padding: 0.85rem 1.5rem;
+
+  /* ---- Nav: section links drop, the CTA stays ---- */
+  .nav { padding: 0 1.25rem; }
+  .nav__links { gap: 1rem; }
+  .nav__link { display: none; }
+
+  /* ---- Hero: shorter and tighter, headline wraps sooner ---- */
+  .hero { min-height: 84vh; }
+  .hero__inner { padding-bottom: 4rem; }
+  .hero h1 { max-width: 13ch; }
+  .hero__sub { font-size: 14px; }
+
+  /* On a phone the scrim runs top-to-bottom, not left-to-right */
+  .hero__scrim {
+    background: linear-gradient(180deg,
+                rgba(42, 36, 32, 0.72) 0%,
+                rgba(42, 36, 32, 0.42) 30%,
+                rgba(42, 36, 32, 0.86) 74%,
+                rgba(42, 36, 32, 0.95) 100%);
   }
-  .hero__right     { padding: 3rem 1.5rem 3.5rem; }
-  .hero__watermark { display: none; }
 
-  .panel  { padding: 2rem 1.5rem; }
+  /* ---- Stages stack, dividers move from right to bottom ---- */
+  .stages { grid-template-columns: 1fr; }
+  .stage {
+    border-right: 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .stage:last-child { border-bottom: 0; }
 
-  .footer        { padding: 3rem 1.5rem; }
-  .footer__inner { grid-template-columns: 1fr; gap: 2.5rem; }
-  .footer__bottom { flex-direction: column; gap: 0.5rem; }
+  /* ---- Scope sheet stacks ---- */
+  .sheet__cols { grid-template-columns: 1fr; }
+  .sheet__col + .sheet__col {
+    border-left: 0;
+    border-top: 0.5px solid var(--border);
+  }
 
-  .page { padding: calc(var(--nav-height) + 4rem) 1.5rem 4rem; }
+  /* ---- Project lead: shorter, tighter overlay ---- */
+  .project-lead { min-height: 62vh; }
+  .project-lead__overlay { padding: 6rem 0 2.75rem; }
+
+  /* ---- Stats: four across is too tight on a phone, so 2 x 2 ---- */
+  .stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 1.25rem;
+    margin-top: 2rem;
+  }
+  .project-lead__note { font-size: 12px; }
+
+  /* ---- Before/after tiles: three across is too small on a phone ---- */
+  .pairs { padding-top: 2.5rem; padding-bottom: 3.25rem; }
+  .reveal-grid { grid-template-columns: 1fr; gap: 8px; }
+  .reveal-tile { aspect-ratio: 3 / 2; }
+
+  /* ---- Everything else to one column ---- */
+  .faq__answer { padding-right: 1.25rem; }
+  .booking__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .enquiry { padding: 2rem 1.5rem; }
+
+  /* ---- Footer ---- */
+  .footer__contact { text-align: left; }
+  .social { justify-content: flex-start; }   /* follows the text */
+  .footer { padding-bottom: 8rem; }   /* room for the sticky bar */
+
+  /* ---- The sticky CTA only exists on phones ---- */
+  .sticky-cta { display: flex; }
 }
 
 
@@ -122,27 +118,19 @@
    PHONE — up to 480px
    ========================================================================== */
 @media (max-width: 480px) {
-  .hero__title    { font-size: 34px; }
-  .hero__buttons  { flex-direction: column; align-items: stretch; }
-  .btn-primary    { text-align: center; }
-  .btn-ghost      { align-self: flex-start; }
+  h1 { font-size: 34px; }
+  h2 { font-size: 27px; }
 
-  .tier { padding: 2rem 1.5rem; }
+  /* The nav button clips off the edge at this width, and it is redundant
+     anyway — the hero carries its own CTA, and the sticky bar takes over
+     the moment the hero scrolls away. So the bar is just the wordmark. */
+  .nav__cta { display: none; }
 
-  .concept__pullquote { font-size: 19px; }
-  .contact__quote p   { font-size: 1.5rem; }
-}
+  .wordmark--large .wordmark__re { font-size: 32px; }
 
+  .btn { padding: 14px 24px; }
 
-/* ==========================================================================
-   PRINT
-   ========================================================================== */
-@media print {
-  .nav,
-  .tally-slot,
-  .panel__button { display: none !important; }
-
-  body     { background: #fff; color: #000; }
-  .section { padding: 1rem 0; }
-  .reveal  { opacity: 1; transform: none; }
+  /* Keep the sticky bar from crowding itself */
+  .sticky-cta { padding: 10px 14px; }
+  .sticky-cta .btn { padding: 12px 18px; }
 }
