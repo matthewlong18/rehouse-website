@@ -119,21 +119,38 @@
       if (fallback) fallback.hidden = true;
       if (panel) panel.classList.add('is-tally-live');
 
+      // Two ways to fill the slot: hand the iframe to Tally's widget, or load
+      // it plainly ourselves. Only one of them may ever touch the iframe.
+      // Setting src ourselves makes loadEmbeds() skip it, and a skipped iframe
+      // is what leaves the form stuck in a fixed-height scroll box instead of
+      // growing to fit. This latch makes whichever gets there first the winner.
+      let settled = false;
+
+      function loadPlainly() {
+        if (settled) return;
+        settled = true;
+        if (iframe && !iframe.getAttribute('src')) iframe.src = src;
+      }
+
+      // A hung request that neither loads nor errors — rare, but it would
+      // otherwise leave the booking section as an empty box for good.
+      // Deliberately long: the old 4s could fire while the widget was still
+      // on its way over a phone connection, causing the very bug above.
+      const hangTimer = window.setTimeout(loadPlainly, 8000);
+
       const script = document.createElement('script');
       script.src = 'https://tally.so/widgets/embed.js';
       script.async = true;
       script.onload = function () {
-        if (window.Tally) window.Tally.loadEmbeds();
+        if (settled || !window.Tally) return;   // too late, or no widget
+        settled = true;
+        window.clearTimeout(hangTimer);
+        window.Tally.loadEmbeds();
       };
+      // Blocked by an ad blocker, or offline: this fires in about a second,
+      // so we show the form straight away rather than sitting on the timer.
+      script.onerror = loadPlainly;
       document.body.appendChild(script);
-
-      // If the widget script never arrives, load the form the plain way so the
-      // booking section is never just an empty box.
-      window.setTimeout(function () {
-        if (!window.Tally && iframe && !iframe.getAttribute('src')) {
-          iframe.src = src;
-        }
-      }, 4000);
       return;
     }
 
